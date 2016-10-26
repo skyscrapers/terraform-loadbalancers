@@ -55,26 +55,6 @@ this module sets up an ELB with listeners for normal traffic and ssl traffic.
 - Default: 60
 - The time in seconds to allow for connections to drain.
 
-### instance_port
-- Int
-- Default: 80
-- The port on the instance to route to
-
-### instance_protocol
-- String
-- Default: "http"
-- The protocol to use to the instance. Valid values are HTTP, HTTPS, TCP, or SSL
-
-### lb_port
-- Boolean
-- default: 80
-- The port to listen on for the load balancer
-
-### lb_protocol
-- String
-- Default: "http"
-- The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL
-
 ### instance_ssl_port
 - Int
 - Default: 443

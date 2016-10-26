@@ -55,6 +55,26 @@ this module sets up an ELB with listeners for normal traffic and ssl traffic.
 - Default: 60
 - The time in seconds to allow for connections to drain.
 
+### access_logs_bucket
+- String
+- Default: Empty
+- The S3 bucket name to store the logs in.
+
+### access_logs_bucket_prefix
+- String
+- Default: empty
+- The S3 bucket prefix. Logs are stored in the root if not configured
+
+### access_logs_interval
+- Int
+- Default: 60
+- The publishing interval in minutes.
+
+### access_logs_enabled
+- Boolean
+- Default: false
+- Boolean to enable / disable access_logs.
+
 ### instance_port
 - Int
 - Default: 80

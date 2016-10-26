@@ -1,5 +1,5 @@
 # elb_ssl terraform module
-this module sets up an ELB with listeners for normal traffic and ssl traffic.
+this module sets up an ELB with listeners for normal traffic
 
 ## Generated resources
 - elb
@@ -25,10 +25,6 @@ this module sets up an ELB with listeners for normal traffic and ssl traffic.
 ### backend_sg
 - List
 - A list of security groups belonging to the backend instances
-
-### ssl_certificate_id
-- String
-- The ARN of an SSL certificate you have uploaded to AWS IAM. Only valid when lb_protocol is either HTTPS or SSL
 
 ### health_target
 - String
@@ -73,26 +69,6 @@ this module sets up an ELB with listeners for normal traffic and ssl traffic.
 ### lb_protocol
 - String
 - Default: "http"
-- The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL
-
-### instance_ssl_port
-- Int
-- Default: 443
-- The port on the instance to route to
-
-### instance_ssl_protocol
-- String
-- Default: "https"
-- The protocol to use to the instance. Valid values are HTTP, HTTPS, TCP, or SSL
-
-### lb_ssl_port
-- Int
-- Default: 443
-- The port to listen on for the load balancer
-
-### lb_ssl_protocol
-- String
-- Default: "https"
 - The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL
 
 ### healthy_threshold

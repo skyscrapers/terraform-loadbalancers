@@ -3,24 +3,10 @@ resource "aws_security_group" "elb" {
   description = "Allow all inbound traffic"
 
   ingress {
-    from_port   = "${var.lb_port}"
-    to_port     = "${var.lb_port}"
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
     from_port   = "${var.lb_ssl_port}"
     to_port     = "${var.lb_ssl_port}"
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port       = "${var.instance_port}"
-    to_port         = "${var.instance_port}"
-    protocol        = "tcp"
-    security_groups = ["${var.backend_sg}"]
   }
 
   egress {

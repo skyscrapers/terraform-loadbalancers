@@ -15,14 +15,6 @@ resource "aws_elb" "elb" {
     lb_protocol       = "${var.lb_protocol}"
   }
 
-  listener {
-    instance_port      = "${var.instance_ssl_port}"
-    instance_protocol  = "${var.instance_ssl_protocol}"
-    lb_port            = "${var.lb_ssl_port}"
-    lb_protocol        = "${var.lb_ssl_protocol}"
-    ssl_certificate_id = "${var.ssl_certificate_id}"
-  }
-
   health_check {
     healthy_threshold   = "${var.healthy_threshold}"
     unhealthy_threshold = "${var.unhealthy_threshold}"

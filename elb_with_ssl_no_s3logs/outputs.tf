@@ -1,21 +1,47 @@
-output "elb" {
-  value = {
-    id =  "${aws_elb.elb.id}"
-    name = "${aws_elb.elb.name}"
-    fqdn = "${aws_elb.elb.dns_name}"
-    source_security_group = "${aws_elb.elb.source_security_group_id}"
-    zone_id = "${aws_elb.elb.zone_id}"
-  }
+output "elb_id" {
+  value = "${aws_elb.elb.id}"
 }
 
-output "security_group" {
-  value = {
-    id = "${aws_security_group.elb.id}"
-    name = "${aws_security_group.elb.name}"
-    description = "${aws_security_group.elb.description}"
-    vpc = "${aws_security_group.elb.vpc_id}"
-    owner = "${aws_security_group.elb.owner_id}"
-    ingres = "${aws_security_group.elb.ingress}"
-    egress = "${aws_security_group.elb.egress}"
-  }
+output "elb_name" {
+  value = "${aws_elb.elb.name}"
+}
+
+output "elb_dns_name" {
+  value = "${aws_elb.elb.dns_name}"
+}
+
+output "elb_source_security_group_id" {
+  value = "${aws_elb.elb.source_security_group_id}"
+}
+
+output "elb_zone_id" {
+  value = "${aws_elb.elb.zone_id}"
+}
+
+output "sg_id" {
+  value = "${aws_security_group.elb.id}"
+}
+
+output "sg_vpc_id" {
+  value = "${aws_security_group.elb.vpc_id}"
+}
+
+output "sg_owner_id" {
+  value = "${aws_security_group.elb.owner_id}"
+}
+
+output "sg_name" {
+  value = "${aws_security_group.elb.name}"
+}
+
+output "sg_description" {
+  value = "${aws_security_group.elb.description}"
+}
+
+output "sg_ingress" {
+  value = "${aws_security_group.elb.ingress}"
+}
+
+output "sg_egress" {
+  value = "${aws_security_group.elb.egress}"
 }

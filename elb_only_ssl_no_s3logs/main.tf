@@ -9,13 +9,6 @@ resource "aws_elb" "elb" {
   security_groups             = ["${aws_security_group.elb.id}"]
 
   listener {
-    instance_port     = "${var.instance_port}"
-    instance_protocol = "${var.instance_protocol}"
-    lb_port           = "${var.lb_port}"
-    lb_protocol       = "${var.lb_protocol}"
-  }
-
-  listener {
     instance_port      = "${var.instance_ssl_port}"
     instance_protocol  = "${var.instance_ssl_protocol}"
     lb_port            = "${var.lb_ssl_port}"

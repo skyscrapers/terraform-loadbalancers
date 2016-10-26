@@ -32,25 +32,6 @@ variable "connection_draining_timeout" {
   default     = "60"
 }
 
-variable "access_logs_bucket" {
-  description = "The S3 bucket name to store the logs in."
-  default     = ""
-}
-
-variable "access_logs_bucket_prefix" {
-  description = "The S3 bucket prefix. Logs are stored in the root if not configured."
-  default     = ""
-}
-
-variable "access_logs_interval" {
-  description = "The publishing interval in minutes."
-  default     = "60"
-}
-
-variable "access_logs_enabled" {
-  default = false
-}
-
 variable "instance_port" {
   description = "The port on the instance to route to"
   default     = 80
@@ -117,8 +98,4 @@ variable "health_target" {
 variable "health_interval" {
   description = " The interval between checks."
   default     = 30
-}
-
-variable "vpc_id" {
-  description = "ID of the VPC where to deploy in"
 }

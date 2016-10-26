@@ -32,43 +32,28 @@ variable "connection_draining_timeout" {
   default     = "60"
 }
 
-variable "access_logs_bucket" {
-  description = "The S3 bucket name to store the logs in."
-  default     = ""
-}
-
-variable "access_logs_bucket_prefix" {
-  description = "The S3 bucket prefix. Logs are stored in the root if not configured."
-  default     = ""
-}
-
-variable "access_logs_interval" {
-  description = "The publishing interval in minutes."
-  default     = "60"
-}
-
-variable "access_logs_enabled" {
-  default = false
-}
-
-variable "instance_port" {
+variable "instance_ssl_port" {
   description = "The port on the instance to route to"
-  default     = 80
+  default     = 443
 }
 
-variable "instance_protocol" {
+variable "instance_ssl_protocol" {
   description = "The protocol to use to the instance. Valid values are HTTP, HTTPS, TCP, or SSL"
-  default     = "http"
+  default     = "https"
 }
 
-variable "lb_port" {
+variable "lb_ssl_port" {
   description = "The port to listen on for the load balancer"
-  default     = 80
+  default     = 443
 }
 
-variable "lb_protocol" {
+variable "lb_ssl_protocol" {
   description = "The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL"
-  default     = "http"
+  default     = "https"
+}
+
+variable "ssl_certificate_id" {
+  description = " The ARN of an SSL certificate you have uploaded to AWS IAM. Only valid when lb_protocol is either HTTPS or SSL"
 }
 
 variable "healthy_threshold" {

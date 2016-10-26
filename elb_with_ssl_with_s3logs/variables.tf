@@ -71,6 +71,30 @@ variable "lb_protocol" {
   default     = "http"
 }
 
+variable "instance_ssl_port" {
+  description = "The port on the instance to route to"
+  default     = 443
+}
+
+variable "instance_ssl_protocol" {
+  description = "The protocol to use to the instance. Valid values are HTTP, HTTPS, TCP, or SSL"
+  default     = "https"
+}
+
+variable "lb_ssl_port" {
+  description = "The port to listen on for the load balancer"
+  default     = 443
+}
+
+variable "lb_ssl_protocol" {
+  description = "The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL"
+  default     = "https"
+}
+
+variable "ssl_certificate_id" {
+  description = " The ARN of an SSL certificate you have uploaded to AWS IAM. Only valid when lb_protocol is either HTTPS or SSL"
+}
+
 variable "healthy_threshold" {
   description = "The number of checks before the instance is declared healthy."
   default     = 3

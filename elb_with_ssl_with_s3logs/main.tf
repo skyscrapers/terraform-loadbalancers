@@ -8,6 +8,13 @@ resource "aws_elb" "elb" {
   connection_draining_timeout = "${var.connection_draining_timeout}"
   security_groups             = ["${aws_security_group.elb.id}"]
 
+  access_logs {
+    bucket        = "${var.access_logs_bucket}"
+    bucket_prefix = "${var.access_logs_bucket_prefix}"
+    interval      = "${var.access_logs_interval}"
+    enabled       = "${var.access_logs_enabled}"
+  }
+
   listener {
     instance_port     = "${var.instance_port}"
     instance_protocol = "${var.instance_protocol}"

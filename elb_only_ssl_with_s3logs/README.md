@@ -55,25 +55,25 @@ this module sets up an ELB with listeners for normal traffic and ssl traffic.
 - Default: 60
 - The time in seconds to allow for connections to drain.
 
-### instance_port
+### access_logs_bucket
+- String
+- Default: Empty
+- The S3 bucket name to store the logs in.
+
+### access_logs_bucket_prefix
+- String
+- Default: empty
+- The S3 bucket prefix. Logs are stored in the root if not configured
+
+### access_logs_interval
 - Int
-- Default: 80
-- The port on the instance to route to
+- Default: 60
+- The publishing interval in minutes.
 
-### instance_protocol
-- String
-- Default: "http"
-- The protocol to use to the instance. Valid values are HTTP, HTTPS, TCP, or SSL
-
-### lb_port
+### access_logs_enabled
 - Boolean
-- default: 80
-- The port to listen on for the load balancer
-
-### lb_protocol
-- String
-- Default: "http"
-- The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL
+- Default: false
+- Boolean to enable / disable access_logs.
 
 ### instance_ssl_port
 - Int
