@@ -39,7 +39,7 @@ variable "instance_ssl_port" {
 
 variable "instance_ssl_protocol" {
   description = "The protocol to use to the instance. Valid values are HTTP, HTTPS, TCP, or SSL"
-  default     = "https"
+  default     = "http"
 }
 
 variable "lb_ssl_port" {

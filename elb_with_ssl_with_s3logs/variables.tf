@@ -34,7 +34,6 @@ variable "connection_draining_timeout" {
 
 variable "access_logs_bucket" {
   description = "The S3 bucket name to store the logs in."
-  default     = ""
 }
 
 variable "access_logs_bucket_prefix" {
@@ -48,7 +47,7 @@ variable "access_logs_interval" {
 }
 
 variable "access_logs_enabled" {
-  default = false
+  default = true
 }
 
 variable "instance_port" {
@@ -78,7 +77,7 @@ variable "instance_ssl_port" {
 
 variable "instance_ssl_protocol" {
   description = "The protocol to use to the instance. Valid values are HTTP, HTTPS, TCP, or SSL"
-  default     = "https"
+  default     = "http"
 }
 
 variable "lb_ssl_port" {
