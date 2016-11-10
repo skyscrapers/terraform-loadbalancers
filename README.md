@@ -33,7 +33,6 @@ this repository will be candidate for a rewrite.
  * [`health_target`]: String(required): The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_security_group`]: String(required): The security group of the ELB backend instances
- * [`vpc_id`]: String(optional):default empty. The vpc_id where the security group will be created.
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -82,7 +81,6 @@ this repository will be candidate for a rewrite.
  * [`access_logs_bucket`]: String(required): The S3 bucket name to store the logs in.
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_security_group`]: String(required): The security group of the ALB backend instances
- * [`vpc_id`]: String(optional):default empty. The vpc_id where the security group will be created.
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -135,7 +133,6 @@ this repository will be candidate for a rewrite.
  * [`health_target`]: String(required): The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_security_group`]: String(required): The security group of the ALB backend instances
- * [`vpc_id`]: String(optional):default empty. The vpc_id where the security group will be created.
  * [`ssl_certificate_id`]: String(required): The ARN of an SSL certificate you have uploaded to AWS IAM.
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
@@ -185,7 +182,6 @@ this repository will be candidate for a rewrite.
  * [`access_logs_bucket`]: String(required): The S3 bucket name to store the logs in.
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_security_group`]: String(required): The security group of the ALB backend instances
- * [`vpc_id`]: String(optional):default empty. The vpc_id where the security group will be created.
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -238,7 +234,6 @@ this repository will be candidate for a rewrite.
  * [`health_target`]: String(required): The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_security_group`]: String(required): The security group of the ALB backend instances
- * [`vpc_id`]: String(optional):default empty. The vpc_id where the security group will be created.
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -291,7 +286,6 @@ this repository will be candidate for a rewrite.
  * [`access_logs_bucket`]: String(required): The S3 bucket name to store the logs in.
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_security_group`]: String(required): The security group of the ALB backend instances
- * [`vpc_id`]: String(optional):default empty. The vpc_id where the security group will be created.
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.

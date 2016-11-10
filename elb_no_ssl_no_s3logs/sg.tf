@@ -1,7 +1,7 @@
 resource "aws_security_group" "elb" {
   name        = "${var.project}-${var.environment}-${var.name}-sg_elb"
   description = "Allow all inbound traffic"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = "${data.aws_subnet.subnet_info.vpc_id}"
 
   ingress {
     from_port   = "${var.lb_port}"
@@ -16,4 +16,8 @@ resource "aws_security_group" "elb" {
     protocol        = "tcp"
     security_groups = ["${var.backend_sg}"]
   }
+}
+
+data "aws_subnet" "subnet_info" {
+  id = "${var.subnets[0]}"
 }

@@ -4,11 +4,6 @@ variable "environment" {}
 
 variable "name" {}
 
-variable "vpc_id" {
-  description = "The VPC ID"
-  default     = ""
-}
-
 variable "backend_sg" {
   type = "list"
 }

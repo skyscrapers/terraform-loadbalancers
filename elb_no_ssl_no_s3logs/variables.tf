@@ -4,11 +4,6 @@ variable "environment" {}
 
 variable "name" {}
 
-variable "vpc_id" {
-  description = "A list of subnet IDs to attach to the ELB."
-  default     = ""
-}
-
 variable "backend_sg" {
   type = "list"
 }
