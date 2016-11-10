@@ -6,7 +6,7 @@ variable "name" {}
 
 variable "vpc_id" {
   description = "A list of subnet IDs to attach to the ELB."
-  default = ""
+  default     = ""
 }
 
 variable "backend_sg" {
