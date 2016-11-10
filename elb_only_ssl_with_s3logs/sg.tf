@@ -1,7 +1,7 @@
 resource "aws_security_group" "elb" {
   name        = "${var.project}-${var.environment}-${var.name}-sg_elb"
   description = "Allow all inbound traffic"
-
+vpc_id = "${var.vpc_id}"
   ingress {
     from_port   = "${var.lb_ssl_port}"
     to_port     = "${var.lb_ssl_port}"
