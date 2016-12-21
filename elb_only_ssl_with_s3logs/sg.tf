@@ -19,7 +19,7 @@ resource "aws_security_group_rule" "allow_elb_outgoing_to_backend" {
   from_port       = "${var.instance_ssl_port}"
   to_port         = "${var.instance_ssl_port}"
   protocol        = "tcp"
-  security_groups = ["${var.backend_sg}"]
+  source_security_group_id = "${var.backend_sg}"
 }
 
 data "aws_subnet" "subnet_info" {
