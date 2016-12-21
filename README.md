@@ -1,6 +1,10 @@
 # terraform_loadbalancers
 Terraform modules to set up a number of variants of load balancers.
 
+WARNING: tag `sg-embedded-rules` is the last commit where the security groups contain embedded rules. If you
+bump to a version later than this, you will have to refactor the state to match the rules to the `aws_security_group_rule`
+resources.
+
 All modules in this repository follow this naming scheme:
 
 ```
