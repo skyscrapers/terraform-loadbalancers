@@ -23,6 +23,7 @@ resource "aws_security_group_rule" "allow_elb_incoming_secure_from_world" {
 }
 
 resource "aws_security_group_rule" "allow_elb_outgoing_to_backend" {
+  count = "${var.backend_sg_count}"
   security_group_id = "${aws_security_group.elb.id}"
   type = "egress"
   from_port       = "${var.instance_port}"
@@ -32,6 +33,7 @@ resource "aws_security_group_rule" "allow_elb_outgoing_to_backend" {
 }
 
 resource "aws_security_group_rule" "allow_elb_outgoing_secure_to_backend" {
+  count = "${var.backend_sg_count}"
   security_group_id = "${aws_security_group.elb.id}"
   type = "egress"
   from_port       = "${var.instance_ssl_port}"
