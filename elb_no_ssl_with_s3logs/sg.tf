@@ -10,7 +10,7 @@ resource "aws_security_group_rule" "allow_elb_incoming_from_world" {
   from_port   = "${var.lb_port}"
   to_port     = "${var.lb_port}"
   protocol    = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks = ["${var.ingoing_allowed_ips}"]
 }
 
 resource "aws_security_group_rule" "allow_elb_outgoing_to_backend" {

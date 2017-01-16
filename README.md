@@ -49,6 +49,7 @@ this repository will be candidate for a rewrite.
  * [`unhealthy_threshold`]: Integer(optional):default 2. The number of checks before the instance is declared unhealthy.
  * [`health_timeout`]: Integer(optional):default 3. The length of time before the check times out.
  * [`health_interval`]: Integer(optional):default 30. The interval between checks.
+  * [`ingoing_allowed_ips`]: List(optional):default 0.0.0.0/0. What IP's are allowed to access the ELB
 
 ### Output
  * [`elb_id`]: String: The id of the ELB
