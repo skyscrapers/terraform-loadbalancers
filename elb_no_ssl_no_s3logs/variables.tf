@@ -78,3 +78,8 @@ variable "health_interval" {
   description = " The interval between checks."
   default     = 30
 }
+
+variable "ingoing_allowed_ips" {
+  default = ["0.0.0.0/0"]
+  type = "list"
+}
