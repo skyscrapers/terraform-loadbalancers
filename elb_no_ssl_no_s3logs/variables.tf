@@ -81,5 +81,5 @@ variable "health_interval" {
 
 variable "ingoing_allowed_ips" {
   default = ["0.0.0.0/0"]
-  type = "list"
+  type    = "list"
 }

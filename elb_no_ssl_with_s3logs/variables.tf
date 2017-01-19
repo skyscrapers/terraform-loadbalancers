@@ -11,7 +11,6 @@ variable "backend_sg" {
 # https://github.com/hashicorp/terraform/issues/10857
 variable "backend_sg_count" {}
 
-
 variable "subnets" {
   description = "A list of subnet IDs to attach to the ELB."
   type        = "list"
@@ -100,5 +99,5 @@ variable "health_interval" {
 
 variable "ingoing_allowed_ips" {
   default = ["0.0.0.0/0"]
-  type = "list"
+  type    = "list"
 }

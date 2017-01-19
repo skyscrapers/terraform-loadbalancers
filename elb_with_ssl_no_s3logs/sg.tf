@@ -6,39 +6,39 @@ resource "aws_security_group" "elb" {
 
 resource "aws_security_group_rule" "allow_elb_incoming_from_world" {
   security_group_id = "${aws_security_group.elb.id}"
-  type = "ingress"
-  from_port   = "${var.lb_port}"
-  to_port     = "${var.lb_port}"
-  protocol    = "tcp"
-  cidr_blocks = ["${var.ingoing_allowed_ips}"]
+  type              = "ingress"
+  from_port         = "${var.lb_port}"
+  to_port           = "${var.lb_port}"
+  protocol          = "tcp"
+  cidr_blocks       = ["${var.ingoing_allowed_ips}"]
 }
 
 resource "aws_security_group_rule" "allow_elb_incoming_secure_from_world" {
   security_group_id = "${aws_security_group.elb.id}"
-  type = "ingress"
-  from_port   = "${var.lb_ssl_port}"
-  to_port     = "${var.lb_ssl_port}"
-  protocol    = "tcp"
-  cidr_blocks = ["${var.ingoing_allowed_ips}"]
+  type              = "ingress"
+  from_port         = "${var.lb_ssl_port}"
+  to_port           = "${var.lb_ssl_port}"
+  protocol          = "tcp"
+  cidr_blocks       = ["${var.ingoing_allowed_ips}"]
 }
 
 resource "aws_security_group_rule" "allow_elb_outgoing_to_backend" {
-  count = "${var.backend_sg_count}"
-  security_group_id = "${aws_security_group.elb.id}"
-  type = "egress"
-  from_port       = "${var.instance_port}"
-  to_port         = "${var.instance_port}"
-  protocol        = "tcp"
+  count                    = "${var.backend_sg_count}"
+  security_group_id        = "${aws_security_group.elb.id}"
+  type                     = "egress"
+  from_port                = "${var.instance_port}"
+  to_port                  = "${var.instance_port}"
+  protocol                 = "tcp"
   source_security_group_id = "${var.backend_sg[count.index]}"
 }
 
 resource "aws_security_group_rule" "allow_elb_outgoing_secure_to_backend" {
-  count = "${var.instance_ssl_port == var.instance_port ? 0 : var.backend_sg_count}"
-  security_group_id = "${aws_security_group.elb.id}"
-  type = "egress"
-  from_port       = "${var.instance_ssl_port}"
-  to_port         = "${var.instance_ssl_port}"
-  protocol        = "tcp"
+  count                    = "${var.instance_ssl_port == var.instance_port ? 0 : var.backend_sg_count}"
+  security_group_id        = "${aws_security_group.elb.id}"
+  type                     = "egress"
+  from_port                = "${var.instance_ssl_port}"
+  to_port                  = "${var.instance_ssl_port}"
+  protocol                 = "tcp"
   source_security_group_id = "${var.backend_sg[count.index]}"
 }
 
