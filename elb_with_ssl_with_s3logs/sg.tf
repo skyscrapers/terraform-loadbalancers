@@ -33,11 +33,11 @@ resource "aws_security_group_rule" "allow_elb_outgoing_to_backend" {
 }
 
 resource "aws_security_group_rule" "allow_elb_outgoing_secure_to_backend" {
-  count = "${var.backend_sg_count}"
+  count = "${var.instance_ssl_port == var.instance_port ? 0 : var.backend_sg_count}"
   security_group_id = "${aws_security_group.elb.id}"
   type = "egress"
-  from_port       = "${var.lb_ssl_port}"
-  to_port         = "${var.lb_ssl_port}"
+  from_port       = "${var.instance_ssl_port}"
+  to_port         = "${var.instance_ssl_port}"
   protocol        = "tcp"
   source_security_group_id = "${var.backend_sg[count.index]}"
 }
