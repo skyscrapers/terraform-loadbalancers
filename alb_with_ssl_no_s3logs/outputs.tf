@@ -10,6 +10,10 @@ output "https_listener" {
   value = "${aws_alb_listener.https.id}"
 }
 
+output "http_listener" {
+  value = "${aws_alb_listener.http.id}"
+}
+
 output "target_group_arns" {
   value = ["${aws_alb_target_group.http_target_group.arn}","${aws_alb_target_group.https_target_group.arn}"]
 }

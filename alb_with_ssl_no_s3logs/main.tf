@@ -18,6 +18,16 @@ resource "aws_alb_target_group" "http_target_group" {
   port     = "${var.backend_http_port}"
   protocol = "${var.backend_http_protocol}"
   vpc_id   = "${var.vpc_id}"
+
+  health_check {
+    interval = "${var.https_interval}"
+    path = "${var.https_path}"
+    timeout = "${var.https_timeout}"
+    healthy_threshold = "${var.https_healthy_threshold}"
+    unhealthy_threshold = "${var.https_unhealthy_threshold}"
+    matcher = "${var.https_matcher}"
+  }
+  
 }
 
 resource "aws_alb_target_group" "https_target_group" {
@@ -25,6 +35,14 @@ resource "aws_alb_target_group" "https_target_group" {
   port     = "${var.backend_https_port}"
   protocol = "${var.backend_https_protocol}"
   vpc_id   = "${var.vpc_id}"
+  health_check {
+    interval = "${var.https_interval}"
+    path = "${var.https_path}"
+    timeout = "${var.https_timeout}"
+    healthy_threshold = "${var.https_healthy_threshold}"
+    unhealthy_threshold = "${var.https_unhealthy_threshold}"
+    matcher = "${var.https_matcher}"
+  }
 }
 
 resource "aws_alb_listener" "https" {

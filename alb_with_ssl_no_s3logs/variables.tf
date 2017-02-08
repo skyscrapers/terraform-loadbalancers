@@ -68,3 +68,51 @@ variable "source_subnets" {
   description = "Subnets cidr blocks from where the ALB will receive the traffic"
   default  = ["0.0.0.0/0"]
 }
+
+variable "https_interval" {
+  default = "30"
+}
+
+variable "https_path" {
+  default = "/"
+}
+
+variable "https_timeout" {
+  default = "5"
+}
+
+variable "https_healthy_threshold" {
+  default = "5"
+}
+
+variable "https_unhealthy_threshold" {
+  default = "2"
+}
+
+variable "https_matcher" {
+  default = "200"
+}
+
+variable "http_interval" {
+  default = "30"
+}
+
+variable "http_path" {
+  default = "/"
+}
+
+variable "http_timeout" {
+  default = "5"
+}
+
+variable "http_healthy_threshold" {
+  default = "5"
+}
+
+variable "http_unhealthy_threshold" {
+  default = "2"
+}
+
+variable "http_matcher" {
+  default = "200"
+}
