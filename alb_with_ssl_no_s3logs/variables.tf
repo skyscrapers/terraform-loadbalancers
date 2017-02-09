@@ -21,11 +21,6 @@ variable "connection_draining_timeout" {
   default     = "300"
 }
 
-variable "http_port" {
-  description = "HTTPS port the ALB is listening to"
-  default     = 80
-}
-
 variable "https_port" {
   description = "HTTPS port the ALB is listening to"
   default     = 443
@@ -47,16 +42,8 @@ variable "project" {
   description = "The current project"
 }
 
-variable "backend_http_port" {
-  default = "80"
-}
-
 variable "backend_https_port" {
-  default = "8443"
-}
-
-variable "backend_http_protocol" {
-  default = "HTTP"
+  default = "80"
 }
 
 variable "backend_https_protocol" {
@@ -90,29 +77,5 @@ variable "https_unhealthy_threshold" {
 }
 
 variable "https_matcher" {
-  default = "200"
-}
-
-variable "http_interval" {
-  default = "30"
-}
-
-variable "http_path" {
-  default = "/"
-}
-
-variable "http_timeout" {
-  default = "5"
-}
-
-variable "http_healthy_threshold" {
-  default = "5"
-}
-
-variable "http_unhealthy_threshold" {
-  default = "2"
-}
-
-variable "http_matcher" {
   default = "200"
 }

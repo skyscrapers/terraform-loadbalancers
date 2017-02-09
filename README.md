@@ -364,12 +364,7 @@ module "elb" {
  * [`https_healthy_threshold`]: String(optional) default 5, The number of consecutive health checks successes required before considering an unhealthy target healthy.
  * [`https_unhealthy_threshold`]: String(optional) default 2, The number of consecutive health check failures required before considering the target unhealthy.
  * [`https_matcher`]: String(optional) default 200, The HTTP codes to use when checking for a successful response from a target.
- * [`http_interval`]: String(optional) default 30, The approximate amount of time, in seconds, between health checks of an individual target. Minimum value 5 seconds, Maximum value 300 seconds.
- * [`http_path`]: String(optional) default /, The destination for the health check request.
- * [`http_timeout`]: String(optional) default 5, The amount of time, in seconds, during which no response means a failed health check.
- * [`http_healthy_threshold`]: String(optional) default 5, The number of consecutive health checks successes required before considering an unhealthy target healthy.
- * [`http_unhealthy_threshold`]: String(optional) default 2, The number of consecutive health check failures required before considering the target unhealthy.
- * [`http_matcher`]: String(optional) default 200, The HTTP codes to use when checking for a successful response from a target.
+
 
 ### Output
  * [`alb_id`]: String: The id of the ALB

@@ -13,28 +13,12 @@ resource "aws_alb" "alb" {
   }
 }
 
-resource "aws_alb_target_group" "http_target_group" {
-  name     = "${var.project}-${var.environment}-${var.name}-http"
-  port     = "${var.backend_http_port}"
-  protocol = "${var.backend_http_protocol}"
-  vpc_id   = "${var.vpc_id}"
-
-  health_check {
-    interval = "${var.https_interval}"
-    path = "${var.https_path}"
-    timeout = "${var.https_timeout}"
-    healthy_threshold = "${var.https_healthy_threshold}"
-    unhealthy_threshold = "${var.https_unhealthy_threshold}"
-    matcher = "${var.https_matcher}"
-  }
-  
-}
-
 resource "aws_alb_target_group" "https_target_group" {
   name     = "${var.project}-${var.environment}-${var.name}-https"
   port     = "${var.backend_https_port}"
   protocol = "${var.backend_https_protocol}"
   vpc_id   = "${var.vpc_id}"
+
   health_check {
     interval = "${var.https_interval}"
     path = "${var.https_path}"
@@ -43,6 +27,7 @@ resource "aws_alb_target_group" "https_target_group" {
     unhealthy_threshold = "${var.https_unhealthy_threshold}"
     matcher = "${var.https_matcher}"
   }
+
 }
 
 resource "aws_alb_listener" "https" {
@@ -50,20 +35,8 @@ resource "aws_alb_listener" "https" {
   port              = "${var.https_port}"
   protocol          = "HTTPS"
   certificate_arn   = "${var.ssl_certificate_id}"
-
   default_action {
     target_group_arn = "${aws_alb_target_group.https_target_group.arn}"
-    type             = "forward"
-  }
-}
-
-resource "aws_alb_listener" "http" {
-  load_balancer_arn = "${aws_alb.alb.arn}"
-  port              = "${var.http_port}"
-  protocol          = "HTTP"
-
-  default_action {
-    target_group_arn = "${aws_alb_target_group.http_target_group.arn}"
     type             = "forward"
   }
 }
