@@ -326,14 +326,64 @@ this repository will be candidate for a rewrite.
  * [`sg_egress`]: Map: The egress rules.
 
 ### Example
-  ```
-  module "elb" {
-    source                    = "github.com/skyscrapers/terraform-loadbalancers//elb_with_ssl_with_s3logs"
-    name                      = "frontend"
-    subnets                   = ["${module.vpc.frontend_public_subnets}"]
-    project                   = "myapp"
-    health_target             = "http:443/health_check"
-    access_logs_bucket        = "elb_logs"
-    access_logs_bucket_prefix = "myapp/frontend/"
-  }
-  ```
+```
+module "elb" {
+  source                    = "github.com/skyscrapers/terraform-loadbalancers//elb_with_ssl_with_s3logs"
+  name                      = "frontend"
+  subnets                   = ["${module.vpc.frontend_public_subnets}"]
+  project                   = "myapp"
+  health_target             = "http:443/health_check"
+  access_logs_bucket        = "elb_logs"
+  access_logs_bucket_prefix = "myapp/frontend/"
+}
+```  
+
+## alb_with_ssl_no_s3logs
+
+### Available variables:
+ * [`name`]: String(required): Name of the ALB
+ * [`subnets`]: List(required): A list of subnet IDs to attach to the ALB.
+ * [`project`]: String(required): The current project
+ * [`vpc_id`]: String(required): ID of the VPC where to deploy in
+ * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
+ * [`backend_security_group`]: String(required): The security group of the ALB backend instances
+ * [`internal`]: Boolean(optional):default to false. If true, ALB will be an internal ALB.
+ * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
+ * [`connection_draining_timeout`]: String(optional):default 300. The time in seconds to allow for connections to drain
+ * [`http_port`]: Integer(optional):default 80. The http alb port
+ * [`https_port`]: Integer(optional):default 443. The https alb port
+ * [`ssl_certificate_id`]: String(optional):IAM ID of the SSL certificate
+ * [`backend_http_port`]: String(optional):default 80. The port to send http traffic
+ * [`backend_https_port`]: String(optional):default 8443. The port to send https traffic
+ * [`backend_http_protocol`]: String(optional):default HTTP. The protocol of the backend for http listener
+ * [`backend_https_protocol`]: String(optional):default HTTP. The protocol of the backend for https listener
+ * [`source_subnets`]: List(optional):default 0.0.0.0/0. Subnets cidr blocks from where the ALB will receive the traffic
+ * [`https_interval`]: String(optional) default 30, The approximate amount of time, in seconds, between health checks of an individual target. Minimum value 5 seconds, Maximum value 300 seconds.
+ * [`https_path`]: String(optional) default /, The destination for the health check request.
+ * [`https_timeout`]: String(optional) default 5, The amount of time, in seconds, during which no response means a failed health check.
+ * [`https_healthy_threshold`]: String(optional) default 5, The number of consecutive health checks successes required before considering an unhealthy target healthy.
+ * [`https_unhealthy_threshold`]: String(optional) default 2, The number of consecutive health check failures required before considering the target unhealthy.
+ * [`https_matcher`]: String(optional) default 200, The HTTP codes to use when checking for a successful response from a target.
+
+
+### Output
+ * [`alb_id`]: String: The id of the ALB
+ * [`sg_id`]: String: The security group of the ALB
+ * [`https_listener`]: String: The id of the https listener
+ * [`http_listener`]: String: The id of the http listener
+ * [`target_group_arns`]: List: the list of arns of the target groups created
+
+### Example
+
+```
+module "alb" {
+  source                    = "github.com/skyscrapers/terraform-loadbalancers//alb_with_ssl_no_s3logs"
+  vpc_id                 = "${var.vpc_id}"
+  backend_security_group = "${module.sg.sg_app_id}"
+  subnets                = "${var.lb_subnets}"
+  ssl_certificate_id     = "${var.ssl_certificate_id}"
+  project                = "${var.project}"
+  environment            = "${var.environment}"
+  name                   = "${var.app_name}"
+}
+```
