@@ -372,6 +372,8 @@ module "elb" {
  * [`https_listener`]: String: The id of the https listener
  * [`http_listener`]: String: The id of the http listener
  * [`target_group_arns`]: List: the list of arns of the target groups created
+ * [`dns_name`]: String: The DNS name of the load balancer.
+ * [`zone_id`]: String: The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record)
 
 ### Example
 
