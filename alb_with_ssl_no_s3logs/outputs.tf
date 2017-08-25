@@ -23,3 +23,7 @@ output "dns_name" {
 output "zone_id" {
   value = "${aws_alb.alb.zone_id}"
 }
+
+output "alb_name" {
+  value = "${aws_alb.alb.name}"
+}

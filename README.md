@@ -368,6 +368,7 @@ module "elb" {
 
 ### Output
  * [`alb_id`]: String: The id of the ALB
+ * [`alb_name`]: String: The name of the ALB
  * [`sg_id`]: String: The security group of the ALB
  * [`https_listener`]: String: The id of the https listener
  * [`http_listener`]: String: The id of the http listener
