@@ -73,7 +73,7 @@ this repository will be candidate for a rewrite.
     subnets       = ["${module.vpc.frontend_public_subnets}"]
     project       = "myapp"
     health_target = "http:80/health_check"
-    backend_sg = ["${module.sg.sg_app_id}"]
+    backend_sg    = ["${module.sg.sg_app_id}"]
 
   }
   ```
@@ -128,7 +128,7 @@ this repository will be candidate for a rewrite.
     health_target             = "http:80/health_check"
     access_logs_bucket        = "elb_logs"
     access_logs_bucket_prefix = "myapp/frontend/"
-    backend_sg = ["${module.sg.sg_app_id}"]
+    backend_sg                = ["${module.sg.sg_app_id}"]
   }
   ```
 
@@ -177,7 +177,7 @@ this repository will be candidate for a rewrite.
     subnets       = ["${module.vpc.frontend_public_subnets}"]
     project       = "myapp"
     health_target = "http:443/health_check"
-    backend_sg = ["${module.sg.sg_app_id}"]
+    backend_sg    = ["${module.sg.sg_app_id}"]
 
   }
   ```
@@ -232,7 +232,7 @@ this repository will be candidate for a rewrite.
     health_target             = "http:443/health_check"
     access_logs_bucket        = "elb_logs"
     access_logs_bucket_prefix = "myapp/frontend/"
-    backend_sg = ["${module.sg.sg_app_id}"]
+    backend_sg                = ["${module.sg.sg_app_id}"]
 
   }
   ```
@@ -285,7 +285,7 @@ this repository will be candidate for a rewrite.
     subnets       = ["${module.vpc.frontend_public_subnets}"]
     project       = "myapp"
     health_target = "http:443/health_check"
-    backend_sg = ["${module.sg.sg_app_id}"]
+    backend_sg    = ["${module.sg.sg_app_id}"]
 
   }
   ```
@@ -344,7 +344,7 @@ module "elb" {
   health_target             = "http:443/health_check"
   access_logs_bucket        = "elb_logs"
   access_logs_bucket_prefix = "myapp/frontend/"
-  backend_sg = ["${module.sg.sg_app_id}"]
+  backend_sg                = ["${module.sg.sg_app_id}"]
 
 }
 ```  
@@ -393,7 +393,7 @@ module "elb" {
 module "alb" {
   source                    = "github.com/skyscrapers/terraform-loadbalancers//alb_with_ssl_no_s3logs"
   vpc_id                 = "${var.vpc_id}"
-  backend_sg = ["${module.sg.sg_app_id}"]
+  backend_sg             = ["${module.sg.sg_app_id}"]
   subnets                = "${var.lb_subnets}"
   ssl_certificate_id     = "${var.ssl_certificate_id}"
   project                = "${var.project}"
@@ -439,7 +439,7 @@ module "alb" {
 module "alb" {
   source                    = "github.com/skyscrapers/terraform-loadbalancers//alb_no_ssl_no_s3logs"
   vpc_id                 = "${var.vpc_id}"
-  backend_sg = ["${module.sg.sg_app_id}"]
+  backend_sg             = ["${module.sg.sg_app_id}"]
   subnets                = "${var.lb_subnets}"
   ssl_certificate_id     = "${var.ssl_certificate_id}"
   project                = "${var.project}"
