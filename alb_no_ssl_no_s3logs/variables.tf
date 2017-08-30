@@ -3,8 +3,13 @@ variable "vpc_id" {
 }
 
 variable "backend_security_group" {
-  description = "The security group of the ALB backend instances"
+  description = "The security groups of the ALB backends instances"
+  type        = "list"
 }
+
+variable "backend_sg_count" {
+  description = "The number of security groups of the ALB backends instances"
+  }
 
 variable "subnets" {
   type        = "list"
