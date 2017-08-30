@@ -22,10 +22,11 @@ resource "aws_security_group_rule" "sg_alb_http_ingress" {
 
 
 resource "aws_security_group_rule" "sg_alb_backend_egress" {
+  count                    = "${var.backend_sg_count}"
   type                     = "egress"
   from_port                = "${var.backend_http_port}"
   to_port                  = "${var.backend_http_port}"
   protocol                 = "tcp"
   security_group_id        = "${aws_security_group.sg_alb.id}"
-  source_security_group_id = "${var.backend_security_group}"
+  source_security_group_id = "${var.backend_security_group[count.index]}"
 }
