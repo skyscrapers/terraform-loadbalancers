@@ -9,7 +9,6 @@ variable "backend_sg" {
 }
 
 # https://github.com/hashicorp/terraform/issues/10857
-variable "backend_sg_count" {}
 
 variable "subnets" {
   description = "A list of subnet IDs to attach to the ELB."

@@ -14,7 +14,7 @@ resource "aws_security_group_rule" "allow_elb_incoming_from_world" {
 }
 
 resource "aws_security_group_rule" "allow_elb_outgoing_to_backend" {
-  count                    = "${var.backend_sg_count}"
+  count                    = "${length(var.backend_sg) == 0 ? 0 : 1}"
   security_group_id        = "${aws_security_group.elb.id}"
   type                     = "egress"
   from_port                = "${var.instance_ssl_port}"

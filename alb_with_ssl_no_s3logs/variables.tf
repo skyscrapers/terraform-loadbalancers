@@ -2,14 +2,10 @@ variable "vpc_id" {
   description = "ID of the VPC where to deploy in"
 }
 
-variable "backend_security_group" {
+variable "backend_sg" {
   description = "The security groups of the ALB backends instances"
   type        = "list"
 }
-
-variable "backend_sg_count" {
-  description = "The number of security groups of the ALB backends instances"
-  }
 
 variable "subnets" {
   type        = "list"

@@ -37,7 +37,6 @@ this repository will be candidate for a rewrite.
  * [`health_target`]: String(required): The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_sg`]: List(required): The security groups of the ELB backends instances
- * [`backend_sg_count`]: Integer(required): The number of security groups of the ALB backends instances
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -74,6 +73,8 @@ this repository will be candidate for a rewrite.
     subnets       = ["${module.vpc.frontend_public_subnets}"]
     project       = "myapp"
     health_target = "http:80/health_check"
+    backend_sg = ["${module.sg.sg_app_id}"]
+
   }
   ```
 
@@ -87,7 +88,6 @@ this repository will be candidate for a rewrite.
  * [`access_logs_bucket`]: String(required): The S3 bucket name to store the logs in.
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_sg`]: List(required): The security groups of the ALB backends instances
- * [`backend_sg_count`]: Integer(required): The number of security groups of the ALB backends instances
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -128,6 +128,7 @@ this repository will be candidate for a rewrite.
     health_target             = "http:80/health_check"
     access_logs_bucket        = "elb_logs"
     access_logs_bucket_prefix = "myapp/frontend/"
+    backend_sg = ["${module.sg.sg_app_id}"]
   }
   ```
 
@@ -140,7 +141,6 @@ this repository will be candidate for a rewrite.
  * [`health_target`]: String(required): The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_sg`]: List(required): The security groups of the ALBs backend instances
- * [`backend_sg_count`]: Integer(required): The number of security groups of the ALB backends instances
  * [`ssl_certificate_id`]: String(required): The ARN of an SSL certificate you have uploaded to AWS IAM.
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
@@ -177,6 +177,8 @@ this repository will be candidate for a rewrite.
     subnets       = ["${module.vpc.frontend_public_subnets}"]
     project       = "myapp"
     health_target = "http:443/health_check"
+    backend_sg = ["${module.sg.sg_app_id}"]
+
   }
   ```
 
@@ -190,7 +192,6 @@ this repository will be candidate for a rewrite.
  * [`access_logs_bucket`]: String(required): The S3 bucket name to store the logs in.
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_sg`]: List(required): The security groups of the ALB backends instances
- * [`backend_sg_count`]: Integer(required): The number of security groups of the ALB backends instances
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -231,6 +232,8 @@ this repository will be candidate for a rewrite.
     health_target             = "http:443/health_check"
     access_logs_bucket        = "elb_logs"
     access_logs_bucket_prefix = "myapp/frontend/"
+    backend_sg = ["${module.sg.sg_app_id}"]
+
   }
   ```
 
@@ -243,7 +246,6 @@ this repository will be candidate for a rewrite.
  * [`health_target`]: String(required): The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_sg`]: List(required): The security groups of the ALB backends instances
- * [`backend_sg_count`]: Integer(required): The number of security groups of the ALB backends instances
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -283,6 +285,8 @@ this repository will be candidate for a rewrite.
     subnets       = ["${module.vpc.frontend_public_subnets}"]
     project       = "myapp"
     health_target = "http:443/health_check"
+    backend_sg = ["${module.sg.sg_app_id}"]
+
   }
   ```
 
@@ -296,7 +300,6 @@ this repository will be candidate for a rewrite.
  * [`access_logs_bucket`]: String(required): The S3 bucket name to store the logs in.
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_sg`]: List(required): The security group of the ALB backends instances
- * [`backend_sg_count`]: Integer(required): The number of security groups of the ALB backends instances
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -341,6 +344,8 @@ module "elb" {
   health_target             = "http:443/health_check"
   access_logs_bucket        = "elb_logs"
   access_logs_bucket_prefix = "myapp/frontend/"
+  backend_sg = ["${module.sg.sg_app_id}"]
+
 }
 ```  
 
@@ -352,8 +357,7 @@ module "elb" {
  * [`project`]: String(required): The current project
  * [`vpc_id`]: String(required): ID of the VPC where to deploy in
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
- * [`backend_security_group`]: List(required): The security groups of the ALB backends instances
- * [`backend_sg_count`]: Integer(required): The number of security groups of the ALB backends instances
+ * [`backend_sg`]: List(required): The security groups of the ALB backends instances
  * [`internal`]: Boolean(optional):default to false. If true, ALB will be an internal ALB.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
  * [`connection_draining_timeout`]: String(optional):default 300. The time in seconds to allow for connections to drain
@@ -390,7 +394,6 @@ module "alb" {
   source                    = "github.com/skyscrapers/terraform-loadbalancers//alb_with_ssl_no_s3logs"
   vpc_id                 = "${var.vpc_id}"
   backend_sg = ["${module.sg.sg_app_id}"]
-  backend_sg_count       = 1
   subnets                = "${var.lb_subnets}"
   ssl_certificate_id     = "${var.ssl_certificate_id}"
   project                = "${var.project}"
@@ -407,8 +410,7 @@ module "alb" {
  * [`project`]: String(required): The current project
  * [`vpc_id`]: String(required): ID of the VPC where to deploy in
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
- * [`backend_security_group`]: String(required): The security group of the ALB backend instances
- * [`backend_sg_count`]: Integer(required): The number of security groups of the ALB backends instances
+ * [`backend_sg`]: String(required): The security group of the ALB backend instances
  * [`internal`]: Boolean(optional):default to false. If true, ALB will be an internal ALB.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
  * [`connection_draining_timeout`]: String(optional):default 300. The time in seconds to allow for connections to drain
@@ -438,7 +440,6 @@ module "alb" {
   source                    = "github.com/skyscrapers/terraform-loadbalancers//alb_no_ssl_no_s3logs"
   vpc_id                 = "${var.vpc_id}"
   backend_sg = ["${module.sg.sg_app_id}"]
-  backend_sg_count       = 1
   subnets                = "${var.lb_subnets}"
   ssl_certificate_id     = "${var.ssl_certificate_id}"
   project                = "${var.project}"
