@@ -4,6 +4,7 @@ variable "vpc_id" {
 
 variable "backend_security_group" {
   description = "The security group of the ALB backend instances"
+  type        = "list"
 }
 
 variable "subnets" {
