@@ -79,3 +79,5 @@ variable "https_unhealthy_threshold" {
 variable "https_matcher" {
   default = "200"
 }
+
+variable "backend_sg_count" {}
