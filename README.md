@@ -410,7 +410,7 @@ module "alb" {
  * [`project`]: String(required): The current project
  * [`vpc_id`]: String(required): ID of the VPC where to deploy in
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
- * [`backend_security_groups`]: String(required): The security group of the ALB backend instances
+ * [`backend_security_groups`]: List(required): The security group of the ALB backend instances
  * [`internal`]: Boolean(optional):default to false. If true, ALB will be an internal ALB.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
  * [`connection_draining_timeout`]: String(optional):default 300. The time in seconds to allow for connections to drain
