@@ -54,7 +54,7 @@ variable "backend_https_protocol" {
 variable "source_subnets" {
   type        = "list"
   description = "Subnets cidr blocks from where the ALB will receive the traffic"
-  default  = ["0.0.0.0/0"]
+  default     = ["0.0.0.0/0"]
 }
 
 variable "https_interval" {

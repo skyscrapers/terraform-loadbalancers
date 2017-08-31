@@ -6,10 +6,8 @@ variable "name" {}
 
 variable "backend_security_groups" {
   description = "The security groups of the ELB backends instances"
-  type = "list"
+  type        = "list"
 }
-
-# https://github.com/hashicorp/terraform/issues/10857
 
 variable "subnets" {
   description = "A list of subnet IDs to attach to the ELB."
