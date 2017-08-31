@@ -14,13 +14,13 @@ resource "aws_security_group_rule" "allow_elb_incoming_from_world" {
 }
 
 resource "aws_security_group_rule" "allow_elb_outgoing_to_backend" {
-  count                    = "${length(var.backend_sg) == 0 ? 0 : 1}"
+  count                    = "${length(var.backend_security_groups)}"
   security_group_id        = "${aws_security_group.elb.id}"
   type                     = "egress"
   from_port                = "${var.instance_port}"
   to_port                  = "${var.instance_port}"
   protocol                 = "tcp"
-  source_security_group_id = "${var.backend_sg[count.index]}"
+  source_security_group_id = "${var.backend_security_groups[count.index]}"
 }
 
 data "aws_subnet" "subnet_info" {

@@ -2,7 +2,7 @@ variable "vpc_id" {
   description = "ID of the VPC where to deploy in"
 }
 
-variable "backend_sg" {
+variable "backend_security_groups" {
   description = "The security groups of the ALB backends instances"
   type        = "list"
 }

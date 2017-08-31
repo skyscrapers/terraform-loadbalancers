@@ -4,7 +4,8 @@ variable "environment" {}
 
 variable "name" {}
 
-variable "backend_sg" {
+variable "backend_security_groups" {
+  description = "The security groups of the ELB backends instances"
   type = "list"
 }
 
