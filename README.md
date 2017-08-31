@@ -87,7 +87,7 @@ this repository will be candidate for a rewrite.
  * [`health_target`]: String(required): The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}
  * [`access_logs_bucket`]: String(required): The S3 bucket name to store the logs in.
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
- * [`backend_security_groups`]: List(required): The security groups of the ALB backends instances
+ * [`backend_security_groups`]: List(required): The security groups of the ELB backends instances
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
