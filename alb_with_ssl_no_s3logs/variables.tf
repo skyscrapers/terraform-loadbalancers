@@ -2,8 +2,9 @@ variable "vpc_id" {
   description = "ID of the VPC where to deploy in"
 }
 
-variable "backend_security_group" {
-  description = "The security group of the ALB backend instances"
+variable "backend_security_groups" {
+  description = "The security groups of the ALB backends instances"
+  type        = "list"
 }
 
 variable "subnets" {
@@ -53,7 +54,7 @@ variable "backend_https_protocol" {
 variable "source_subnets" {
   type        = "list"
   description = "Subnets cidr blocks from where the ALB will receive the traffic"
-  default  = ["0.0.0.0/0"]
+  default     = ["0.0.0.0/0"]
 }
 
 variable "https_interval" {

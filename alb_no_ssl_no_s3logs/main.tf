@@ -1,4 +1,3 @@
-
 # Create a new load balancer
 resource "aws_alb" "alb" {
   name            = "${var.project}-${var.environment}-${var.name}-alb"
@@ -20,14 +19,13 @@ resource "aws_alb_target_group" "http_target_group" {
   vpc_id   = "${var.vpc_id}"
 
   health_check {
-    interval = "${var.http_interval}"
-    path = "${var.http_path}"
-    timeout = "${var.http_timeout}"
-    healthy_threshold = "${var.http_healthy_threshold}"
+    interval            = "${var.http_interval}"
+    path                = "${var.http_path}"
+    timeout             = "${var.http_timeout}"
+    healthy_threshold   = "${var.http_healthy_threshold}"
     unhealthy_threshold = "${var.http_unhealthy_threshold}"
-    matcher = "${var.http_matcher}"
+    matcher             = "${var.http_matcher}"
   }
-
 }
 
 resource "aws_alb_listener" "http" {
@@ -35,6 +33,7 @@ resource "aws_alb_listener" "http" {
   port              = "${var.http_port}"
   protocol          = "HTTP"
   certificate_arn   = "${var.ssl_certificate_id}"
+
   default_action {
     target_group_arn = "${aws_alb_target_group.http_target_group.arn}"
     type             = "forward"

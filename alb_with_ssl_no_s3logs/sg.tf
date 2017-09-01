@@ -19,13 +19,12 @@ resource "aws_security_group_rule" "sg_alb_https_ingress" {
   security_group_id = "${aws_security_group.sg_alb.id}"
 }
 
-
-
 resource "aws_security_group_rule" "sg_alb_backend_egress" {
+  count                    = "${length(var.backend_security_groups)}"
   type                     = "egress"
   from_port                = "${var.backend_https_port}"
   to_port                  = "${var.backend_https_port}"
   protocol                 = "tcp"
   security_group_id        = "${aws_security_group.sg_alb.id}"
-  source_security_group_id = "${var.backend_security_group}"
+  source_security_group_id = "${var.backend_security_groups[count.index]}"
 }
