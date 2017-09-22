@@ -360,7 +360,7 @@ module "elb" {
  * [`backend_security_groups`]: List(required): The security groups of the ALB backends instances
  * [`internal`]: Boolean(optional):default to false. If true, ALB will be an internal ALB.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
- * [`connection_draining_timeout`]: String(optional):default 300. The time in seconds to allow for connections to drain
+ * [`deregistration_delay`]: String(optional):default 30. The time in seconds to allow before deregistering
  * [`http_port`]: Integer(optional):default 80. The http alb port
  * [`https_port`]: Integer(optional):default 443. The https alb port
  * [`ssl_certificate_id`]: String(optional):IAM ID of the SSL certificate
@@ -413,7 +413,7 @@ module "alb" {
  * [`backend_security_groups`]: List(required): The security group of the ALB backend instances
  * [`internal`]: Boolean(optional):default to false. If true, ALB will be an internal ALB.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
- * [`connection_draining_timeout`]: String(optional):default 300. The time in seconds to allow for connections to drain
+ * [`deregistration_delay`]: String(optional):default 30. The time in seconds to allow before deregistering
  * [`http_port`]: Integer(optional):default 80. The http alb port
  * [`ssl_certificate_id`]: String(optional):IAM ID of the SSL certificate
  * [`backend_http_port`]: String(optional):default 80. The port to send http traffic
