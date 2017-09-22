@@ -13,10 +13,11 @@ resource "aws_alb" "alb" {
 }
 
 resource "aws_alb_target_group" "http_target_group" {
-  name     = "${var.project}-${var.environment}-${var.name}-http"
-  port     = "${var.backend_http_port}"
-  protocol = "${var.backend_http_protocol}"
-  vpc_id   = "${var.vpc_id}"
+  name                 = "${var.project}-${var.environment}-${var.name}-http"
+  port                 = "${var.backend_http_port}"
+  protocol             = "${var.backend_http_protocol}"
+  vpc_id               = "${var.vpc_id}"
+  deregistration_delay = "${var.deregistration_delay}"
 
   health_check {
     interval            = "${var.http_interval}"

@@ -17,8 +17,8 @@ variable "internal" {
   default     = false
 }
 
-variable "connection_draining_timeout" {
-  description = "The time in seconds to allow for connections to drain"
+variable "deregistration_delay" {
+  description = "The time in seconds to allow before deregistering"
   default     = "30"
 }
 
