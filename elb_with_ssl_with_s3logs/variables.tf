@@ -4,12 +4,10 @@ variable "environment" {}
 
 variable "name" {}
 
-variable "backend_sg" {
-  type = "list"
+variable "backend_security_groups" {
+  description = "The security groups of the ELB backends instances"
+  type        = "list"
 }
-
-# https://github.com/hashicorp/terraform/issues/10857
-variable "backend_sg_count" {}
 
 variable "subnets" {
   description = "A list of subnet IDs to attach to the ELB."
