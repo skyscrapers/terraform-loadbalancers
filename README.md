@@ -347,103 +347,134 @@ module "elb" {
   backend_security_groups   = ["${module.sg.sg_app_id}"]
 
 }
-```  
+```
 
-## alb_with_ssl_no_s3logs
+## alb
 
-### Available variables:
- * [`name`]: String(required): Name of the ALB
- * [`subnets`]: List(required): A list of subnet IDs to attach to the ALB.
- * [`project`]: String(required): The current project
- * [`vpc_id`]: String(required): ID of the VPC where to deploy in
- * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
- * [`backend_security_groups`]: List(required): The security groups of the ALB backends instances
- * [`internal`]: Boolean(optional):default to false. If true, ALB will be an internal ALB.
- * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
- * [`deregistration_delay`]: String(optional):default 30. The time in seconds to allow before deregistering
- * [`http_port`]: Integer(optional):default 80. The http alb port
- * [`https_port`]: Integer(optional):default 443. The https alb port
- * [`ssl_certificate_id`]: String(optional):IAM ID of the SSL certificate
- * [`backend_http_port`]: String(optional):default 80. The port to send http traffic
- * [`backend_https_port`]: String(optional):default 8443. The port to send https traffic
- * [`backend_http_protocol`]: String(optional):default HTTP. The protocol of the backend for http listener
- * [`backend_https_protocol`]: String(optional):default HTTP. The protocol of the backend for https listener
- * [`source_subnets`]: List(optional):default 0.0.0.0/0. Subnets cidr blocks from where the ALB will receive the traffic
- * [`https_interval`]: String(optional) default 30, The approximate amount of time, in seconds, between health checks of an individual target. Minimum value 5 seconds, Maximum value 300 seconds.
- * [`https_path`]: String(optional) default /, The destination for the health check request.
- * [`https_timeout`]: String(optional) default 5, The amount of time, in seconds, during which no response means a failed health check.
- * [`https_healthy_threshold`]: String(optional) default 5, The number of consecutive health checks successes required before considering an unhealthy target healthy.
- * [`https_unhealthy_threshold`]: String(optional) default 2, The number of consecutive health check failures required before considering the target unhealthy.
- * [`https_matcher`]: String(optional) default 200, The HTTP codes to use when checking for a successful response from a target.
+Setup an ALB with related resources.
 
+### Available variables
+
+* [`name`]: String(required): Name of the ALB
+* [`environment`]: String(required): Environment where this ALB is deployed, eg. staging
+* [`project`]: String(required): The current project
+* [`vpc_id`]: String(required): The ID of the VPC in which to deploy
+* [`internal`]: Bool(optional, false): Is this an internal ALB or not
+* [`subnets`]: List(required): Subnets to deploy the ALB in
+* [`enable_deletion_protection`]: Bool(optional, false): Whether to enable deletion protection of this ALB or not
+* [`access_logs`]: List(optional, []): An ALB access_logs block
+* [`tags`]: Map(optional, {}): Optional tags
+* [`enable_http_listener`]: Bool(optional, false): Whether to enable the HTTP listener
+* [`http_port`]: Int(optional, 80): HTTP port the ALB is listening to
+* [`enable_https_listener`]: Bool(optional, true): Whether to enable the HTTPS listener
+* [`https_port`]: Int(optional, 443): HTTPS port the ALB is listening to
+* [`https_certificate_arn`]: String(required): IAM ARN of the SSL certificate for the HTTPS listener
+* [`default_target_group_arn`]: String(optional, ""): Default target group ARN to add to the HTTP listener. Creates a default target group if not set
+* [`target_port`]: Int(optional, 80): The port of which targets receive traffic
+* [`target_protocol`]: String(optional, "HTTP"): The protocol to sue for routing traffic to the targets
+* [`target_deregistration_delay`]: Int(optional, 30): The time in seconds before deregistering the target
+* [`target_stickiness`]: List(optional, []): An ALB target_group stickiness block
+* [`target_health_interval`]: Int(optional, 30): Time in seconds between target health checks
+* [`target_health_path`]: String(optional, "/"): Path for the health check request
+* [`target_health_timeout`]: Int(optional, 5): Time in seconds to wait for a successful health check response
+* [`target_health_healthy_threshold`]: Int(optional, 5): The number of consecutive health checks successes before considering a target healthy
+* [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
+* [`target_health_matcher`]: Int(optional, 200): The HTTP codes to use when checking for a successful response from a target
+* [`target_security_groups`]: List(required): Security groups of the ALB target instances
+* [`source_subnet_cidrs`]: List(optional, ["0.0.0.0/0"]): Subnet CIDR blocks from where the ALB will receive traffic
 
 ### Output
- * [`alb_id`]: String: The id of the ALB
- * [`alb_name`]: String: The name of the ALB
- * [`sg_id`]: String: The security group of the ALB
- * [`https_listener`]: String: The id of the https listener
- * [`http_listener`]: String: The id of the http listener
- * [`target_group_arns`]: List: the list of arns of the target groups created
- * [`dns_name`]: String: The DNS name of the load balancer.
- * [`zone_id`]: String: The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record)
+
+* [`id`]: ID of the ALB
+* [`arn`]: ARN of the ALB
+* [`name`]: Name of the ALB
+* [`dns_name`]: DNS name of the ALB
+* [`zone_id`]: DNS zone ID of the ALB
+* [`sg_id`]: ID of the ALB security group
+* [`http_listener_id`]: ID of the ALB HTTP listener
+* [`https_listener_id`]: ID of the ALB HTTPS listener
+* [`target_group_arn`]: ID of the default target group
 
 ### Example
 
-```
+```terraform
 module "alb" {
-  source                  = "github.com/skyscrapers/terraform-loadbalancers//alb_with_ssl_no_s3logs"
-  vpc_id                  = "${var.vpc_id}"
-  backend_security_groups = ["${module.sg.sg_app_id}"]
-  subnets                 = "${var.lb_subnets}"
-  ssl_certificate_id      = "${var.ssl_certificate_id}"
-  project                 = "${var.project}"
-  environment             = "${var.environment}"
-  name                    = "${var.app_name}"
+  source                   = "github.com/skyscrapers/terraform-loadbalancers//alb?ref=1.0.0"
+  name                     = "shared"
+  environment              = "${terraform.workspace}"
+  project                  = "${var.project}"
+  vpc_id                   = "${data.terraform_remote_state.shared_static.vpc_id}"
+  subnets                  = "${data.terraform_remote_state.shared_static.public_lb_subnets}"
+  enable_http_listener     = true
+  enable_https_listener    = true
+  https_certificate_arn    = "${var.certificate_arn}"
+  default_target_group_arn = "${module.web.target_group_arn}"
+  target_security_groups   = ["${module.sg.sg_app_id}"]
+
+  access_logs = [{
+    bucket = "alb-logs-bucket"
+  }]
+
+  target_stickiness = [{
+    type = "lb_cookie"
+  }]
+
+  tags = {
+    Role = "loadbalancer"
+  }
 }
 ```
 
-## alb_no_ssl_no_s3logs
+## alb\_rule\_target
 
-### Available variables:
- * [`name`]: String(required): Name of the ALB
- * [`subnets`]: List(required): A list of subnet IDs to attach to the ALB.
- * [`project`]: String(required): The current project
- * [`vpc_id`]: String(required): ID of the VPC where to deploy in
- * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
- * [`backend_security_groups`]: List(required): The security group of the ALB backend instances
- * [`internal`]: Boolean(optional):default to false. If true, ALB will be an internal ALB.
- * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
- * [`deregistration_delay`]: String(optional):default 30. The time in seconds to allow before deregistering
- * [`http_port`]: Integer(optional):default 80. The http alb port
- * [`ssl_certificate_id`]: String(optional):IAM ID of the SSL certificate
- * [`backend_http_port`]: String(optional):default 80. The port to send http traffic
- * [`backend_http_protocol`]: String(optional):default HTTP. The protocol of the backend for http listener
- * [`source_subnets`]: List(optional):default 0.0.0.0/0. Subnets cidr blocks from where the ALB will receive the traffic
- * [`http_interval`]: String(optional) default 30, The approximate amount of time, in seconds, between health checks of an individual target. Minimum value 5 seconds, Maximum value 300 seconds.
- * [`http_path`]: String(optional) default /, The destination for the health check request.
- * [`http_timeout`]: String(optional) default 5, The amount of time, in seconds, during which no response means a failed health check.
- * [`http_healthy_threshold`]: String(optional) default 5, The number of consecutive health checks successes required before considering an unhealthy target healthy.
- * [`http_unhealthy_threshold`]: String(optional) default 2, The number of consecutive health check failures required before considering the target unhealthy.
- * [`http_matcher`]: String(optional) default 200, The HTTP codes to use when checking for a successful response from a target.
+Create an ALB listener\_rule and attached target\_group
+### Available variables
 
+* [`name`]: String(required): Name of the ALB
+* [`environment`]: String(required): Environment where this ALB is deployed, eg. staging
+* [`project`]: String(required): The current project
+* [`vpc_id`]: String(required): The ID of the VPC in which to deploy
+* [`listener_arn`]: String(required): The ARN of the listener to which to attach the rule
+* [`listener_priority`]: Int(required): The priority for the rule
+* [`listener_condition_field`]: String(optional, \"path-pattern\"): Must be one of `path-pattern` for path based routing or `host-header` for host based routing
+* [`listener_condition_values`]: List(required): The path or host patterns to match. A maximum of 1 can be defined
+* [`target_port`]: Int(optional, 80): The port of which targets receive traffic
+* [`target_protocol`]: String(optional, "HTTP"): The protocol to sue for routing traffic to the targets
+* [`target_deregistration_delay`]: Int(optional, 30): The time in seconds before deregistering the target
+* [`target_stickiness`]: List(optional, []): An ALB target_group stickiness block
+* [`target_health_interval`]: Int(optional, 30): Time in seconds between target health checks
+* [`target_health_path`]: String(optional, "/"): Path for the health check request
+* [`target_health_timeout`]: Int(optional, 5): Time in seconds to wait for a successful health check response
+* [`target_health_healthy_threshold`]: Int(optional, 5): The number of consecutive health checks successes before considering a target healthy
+* [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
+* [`target_health_matcher`]: Int(optional, 200): The HTTP codes to use when checking for a successful response from a target
+* [`tags`]: Map(optional, {}): Optional tags
 
 ### Output
- * [`alb_id`]: String: The id of the ALB
- * [`sg_id`]: String: The security group of the ALB
- * [`http_listener`]: String: The id of the http listener
- * [`target_group_arns`]: List: the list of arns of the target groups created
+
+* [`target_group_arn`]: ID of the target group
 
 ### Example
 
-```
-module "alb" {
-  source                  = "github.com/skyscrapers/terraform-loadbalancers//alb_no_ssl_no_s3logs"
-  vpc_id                  = "${var.vpc_id}"
-  backend_security_groups = ["${module.sg.sg_app_id}"]
-  subnets                 = "${var.lb_subnets}"
-  ssl_certificate_id      = "${var.ssl_certificate_id}"
-  project                 = "${var.project}"
-  environment             = "${var.environment}"
-  name                    = "${var.app_name}"
+```terraform
+module "target" {
+  source                    = "github.com/skyscrapers/terraform-loadbalancers//alb_rule_target_rule?ref=1.0.0"
+  name                      = "web"
+  environment               = "${terraform.workspace}"
+  project                   = "${var.project}"
+  vpc_id                    = "${data.terraform_remote_state.shared_static.vpc_id}"
+  listener_arn              = "${module.alb.https_listener_id}"
+  listener_priority         = 100
+  listener_condition_field  = "host-header"
+  listener_condition_values = ["${var.web_url}"]
+  target_port               = "${var.app_port}"
+
+  target_stickiness = [{
+    type = "lb_cookie"
+  }]
+
+  tags = {
+    Role = "loadbalancer"
+  }
 }
 ```
