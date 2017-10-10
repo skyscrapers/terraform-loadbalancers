@@ -31,7 +31,7 @@ resource "aws_alb_target_group" "target" {
   }
 
   tags = "${merge("${var.tags}",
-    map("Name", "${var.project}-${var.environment}-${var.name}-default",
+    map("Name", "${var.project}-${var.environment}-${var.name}",
       "Environment", "${var.environment}",
       "Project", "${var.project}"))
   }"
