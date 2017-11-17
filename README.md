@@ -448,6 +448,7 @@ Create an ALB listener\_rule and attached target\_group
 * [`target_health_healthy_threshold`]: Int(optional, 5): The number of consecutive health checks successes before considering a target healthy
 * [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
 * [`target_health_matcher`]: Int(optional, 200): The HTTP codes to use when checking for a successful response from a target
+* [`target_health_protocol`]: String(optional, HTTP): The protocol to use for the healthcheck
 * [`tags`]: Map(optional, {}): Optional tags
 
 ### Output
