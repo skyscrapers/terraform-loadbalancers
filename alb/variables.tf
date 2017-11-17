@@ -132,3 +132,8 @@ variable "source_subnet_cidrs" {
   type        = "list"
   default     = ["0.0.0.0/0"]
 }
+
+variable "target_health_protocol" {
+  default     = "HTTP"
+  description = "Protocol to use for the healthcheck"
+}
