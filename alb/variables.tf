@@ -127,6 +127,11 @@ variable "target_security_groups" {
   type        = "list"
 }
 
+
+variable "target_security_groups_count" {
+  description = "Int(required): Number of security groups of the ALB target instances"
+}
+
 variable "source_subnet_cidrs" {
   description = "List(optional, [\"0.0.0.0/0\"]): Subnet CIDR blocks from where the ALB will receive traffic"
   type        = "list"

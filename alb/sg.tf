@@ -31,7 +31,7 @@ resource "aws_security_group_rule" "sg_alb_https_ingress" {
 }
 
 resource "aws_security_group_rule" "sg_alb_target_egress" {
-  count                    = "${length(var.target_security_groups)}"
+  count                    = "${var.target_security_groups_count}"
   security_group_id        = "${aws_security_group.sg_alb.id}"
   type                     = "egress"
   from_port                = "${var.target_port}"

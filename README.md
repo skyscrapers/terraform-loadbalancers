@@ -381,6 +381,7 @@ Setup an ALB with related resources.
 * [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
 * [`target_health_matcher`]: Int(optional, 200): The HTTP codes to use when checking for a successful response from a target
 * [`target_security_groups`]: List(required): Security groups of the ALB target instances
+* [`target_security_groups_count`]: Int(required): Number of security groups of the ALB target instances
 * [`source_subnet_cidrs`]: List(optional, ["0.0.0.0/0"]): Subnet CIDR blocks from where the ALB will receive traffic
 
 ### Output
