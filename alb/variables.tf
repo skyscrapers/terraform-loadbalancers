@@ -130,7 +130,6 @@ variable "target_security_groups" {
 
 variable "target_security_groups_count" {
   description = "Int(required): Number of security groups of the ALB target instances"
-  default = 1
 }
 
 variable "source_subnet_cidrs" {
