@@ -127,7 +127,6 @@ variable "target_security_groups" {
   type        = "list"
 }
 
-
 variable "target_security_groups_count" {
   description = "Int(required): Number of security groups of the ALB target instances"
 }
