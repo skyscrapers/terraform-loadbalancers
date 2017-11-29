@@ -16,7 +16,7 @@ resource "aws_alb" "alb" {
 
 resource "aws_alb_target_group" "default" {
   count                = "${var.default_target_group_arn == "" ? 1 : 0}"
-  name_prefix          = "${var.project}-${var.environment}-${var.name}-"
+  name_prefix          = "${var.project}-${var.environment}-${var.name}-default-"
   port                 = "${var.target_port}"
   protocol             = "${var.target_protocol}"
   vpc_id               = "${var.vpc_id}"
