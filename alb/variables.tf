@@ -1,5 +1,5 @@
-variable "name" {
-  description = "String(required): Name of the ALB"
+variable "name_prefix" {
+  description = "String(required): Name prefix of the ALB and security group"
 }
 
 variable "environment" {

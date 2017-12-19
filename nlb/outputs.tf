@@ -8,11 +8,6 @@ output "arn" {
   value       = "${aws_lb.nlb.arn}"
 }
 
-output "name" {
-  description = "Name of the NLB"
-  value       = "${aws_lb.nlb.name}"
-}
-
 output "dns_name" {
   description = "DNS name of the NLB"
   value       = "${aws_lb.nlb.dns_name}"

@@ -12,7 +12,7 @@ Setup an ALB with related resources.
 
 ### Available variables
 
-* [`name`]: String(required): Name of the ALB
+* [`name_prefix`]: String(required): Name prefix of the ALB and security group
 * [`environment`]: String(required): Environment where this ALB is deployed, eg. staging
 * [`project`]: String(required): The current project
 * [`vpc_id`]: String(required): The ID of the VPC in which to deploy
@@ -26,7 +26,6 @@ Setup an ALB with related resources.
 
 * [`id`]: ID of the ALB
 * [`arn`]: ARN of the ALB
-* [`name`]: Name of the ALB
 * [`dns_name`]: DNS name of the ALB
 * [`zone_id`]: DNS zone ID of the ALB
 * [`sg_id`]: ID of the ALB security group
@@ -36,7 +35,7 @@ Setup an ALB with related resources.
 ```hcl
 module "alb" {
   source                   = "github.com/skyscrapers/terraform-loadbalancers//alb?ref=5.0.0"
-  name                     = "shared"
+  name_prefix              = "shared"
   environment              = "${terraform.workspace}"
   project                  = "${var.project}"
   vpc_id                   = "${data.terraform_remote_state.shared_static.vpc_id}"
@@ -87,7 +86,7 @@ module "alb" {
 
 ```hcl
 module "alb_listener_https" {
-  source                       = "github.com/skyscrapers/terraform-loadbalancers//alb_listener?ref=5.0.0"
+  source                = "github.com/skyscrapers/terraform-loadbalancers//alb_listener?ref=5.0.0"
   environment           = "${terraform.workspace}"
   project               = "${var.project}"
   vpc_id                = "${data.terraform_remote_state.static.vpc_id}"
@@ -176,7 +175,7 @@ Setup an NLB with related resources.
 
 ### Available variables
 
-* [`name`]: String(required): Name of the NLB
+* [`name_prefix`]: String(required): Name prefix of the NLB and security group
 * [`environment`]: String(required): Environment where this NLB is deployed, eg. staging
 * [`project`]: String(required): The current project
 * [`vpc_id`]: String(required): The ID of the VPC in which to deploy
@@ -190,7 +189,6 @@ Setup an NLB with related resources.
 
 * [`id`]: ID of the NLB
 * [`arn`]: ARN of the NLB
-* [`name`]: Name of the NLB
 * [`dns_name`]: DNS name of the NLB
 * [`zone_id`]: DNS zone ID of the NLB
 * [`sg_id`]: ID of the NLB security group

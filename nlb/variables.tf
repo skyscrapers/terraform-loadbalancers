@@ -1,5 +1,5 @@
-variable "name" {
-  description = "String(required): Name of the NLB"
+variable "name_prefix" {
+  description = "String(required): Name prefix of the NLB and security group"
 }
 
 variable "environment" {
@@ -24,7 +24,7 @@ variable "subnets" {
   type        = "list"
 }
 
- variable "enable_deletion_protection" {
+variable "enable_deletion_protection" {
   description = "Bool(optional, false): Whether to enable deletion protection of this NLB or not"
   default     = false
 }

@@ -1,7 +1,7 @@
 # Create a new load balancer
 resource "aws_lb" "alb" {
   load_balancer_type         = "application"
-  name                       = "${var.project}-${var.environment}-${var.name}-alb"
+  name_prefix                = "${var.name_prefix}"
   internal                   = "${var.internal}"
   subnets                    = ["${var.subnets}"]
   security_groups            = ["${aws_security_group.sg_alb.id}"]
@@ -9,7 +9,7 @@ resource "aws_lb" "alb" {
   access_logs                = ["${var.access_logs}"]
 
   tags = "${merge("${var.tags}",
-    map("Name", "${var.project}-${var.environment}-${var.name}-alb",
+    map("Name", "${var.project}-${var.environment}-${var.name_prefix}-alb",
       "Environment", "${var.environment}",
       "Project", "${var.project}"))
   }"
