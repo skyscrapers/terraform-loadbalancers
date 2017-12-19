@@ -110,6 +110,14 @@ module "alb_listener_https" {
 ## alb\_rule\_target
 
 Create an ALB listener\_rule and attached target\_group
+
+*Future work:*
+
+Add support for registering additional certificates on an LB listener from the `alb_rule_target` module. 
+While adding certificates on an ALB listener is supported in the console/cli/sdk, it is not yet integrated 
+in the Terraform AWS provider. Request was filed as https://github.com/terraform-providers/terraform-provider-aws/issues/1853 
+and the corresponding PR is https://github.com/terraform-providers/terraform-provider-aws/pull/2686
+
 ### Available variables
 
 * [`name`]: String(required): Name of the ALB
