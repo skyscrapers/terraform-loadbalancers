@@ -1,5 +1,5 @@
-variable "name" {
-  description = "String(required): Name of the ALB"
+variable "name_prefix" {
+  description = "String(required): Name prefix of the ALB listener"
 }
 
 variable "environment" {
@@ -10,19 +10,27 @@ variable "project" {
   description = "String(required): The current project"
 }
 
+variable "vpc_id" {
+  description = "String(required): The ID of the VPC in which to deploy"
+}
+
+variable "alb_arn" {
+  description = "String(required): ARN of the ALB on which this listener will be attached."
+}
+
 variable "default_target_group_arn" {
   description = "String(optional, \"\"): Default target group ARN to add to the HTTP listener. Creates a default target group if not set"
   default     = ""
 }
 
-variable "http_port" {
-  description = "Int(optional, 80): HTTP port the ALB is listening to"
-  default     = 80
+variable "ingress_port" {
+  description = "Int(optional, HTTP/HTTPS port): Ingress port the ALB listener is listening to"
+  default     = -1
 }
 
-variable "https_port" {
-  description = "Int(optional, 443): HTTPS port the ALB is listening to"
-  default     = 443
+variable "alb_sg_id" {
+  description = "String(required): ID of the security group attached to the load balancer"
+  default     = -1
 }
 
 variable "https_certificate_arn" {
@@ -81,15 +89,6 @@ variable "target_health_matcher" {
   default     = 200
 }
 
-variable "target_security_groups" {
-  description = "List(required): Security groups of the ALB target instances"
-  type        = "list"
-}
-
-variable "target_security_groups_count" {
-  description = "Int(required): Number of security groups of the ALB target instances"
-}
-
 variable "source_subnet_cidrs" {
   description = "List(optional, [\"0.0.0.0/0\"]): Subnet CIDR blocks from where the ALB will receive traffic"
   type        = "list"
@@ -99,4 +98,10 @@ variable "source_subnet_cidrs" {
 variable "target_health_protocol" {
   default     = "HTTP"
   description = "Protocol to use for the healthcheck"
+}
+
+variable "tags" {
+  description = "Map(optional, {}): Optional tags"
+  type        = "map"
+  default     = {}
 }

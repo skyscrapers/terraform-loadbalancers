@@ -1,5 +1,5 @@
 # Create a new load balancer
-resource "aws_alb" "alb" {
+resource "aws_lb" "alb" {
   name                       = "${var.project}-${var.environment}-${var.name}-alb"
   internal                   = "${var.internal}"
   subnets                    = ["${var.subnets}"]
