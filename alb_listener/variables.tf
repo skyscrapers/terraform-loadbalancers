@@ -18,6 +18,10 @@ variable "alb_arn" {
   description = "String(required): ARN of the ALB on which this listener will be attached."
 }
 
+variable "alb_sg_id" {
+  description = "String(required): ID of the security group attached to the load balancer"
+}
+
 variable "default_target_group_arn" {
   description = "String(optional, \"\"): Default target group ARN to add to the HTTP listener. Creates a default target group if not set"
   default     = ""
@@ -28,13 +32,8 @@ variable "ingress_port" {
   default     = -1
 }
 
-variable "alb_sg_id" {
-  description = "String(required): ID of the security group attached to the load balancer"
-  default     = -1
-}
-
 variable "https_certificate_arn" {
-  description = "String(required): IAM ARN of the SSL certificate for the HTTPS listener"
+  description = "String(optional, \"\"): IAM ARN of the SSL certificate for the HTTPS listener"
   default     = ""
 }
 

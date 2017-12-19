@@ -18,6 +18,11 @@ variable "nlb_arn" {
   description = "String(required): ARN of the NLB on which this listener will be attached."
 }
 
+variable "nlb_sg_id" {
+  description = "String(required): ID of the security group attached to the load balancer"
+  default     = -1
+}
+
 variable "default_target_group_arn" {
   description = "String(optional, \"\"): Default target group ARN to add to the HTTP listener. Creates a default target group if not set"
   default     = ""
@@ -25,11 +30,6 @@ variable "default_target_group_arn" {
 
 variable "ingress_port" {
   description = "Int(required): Ingress port the NLB listener is listening to"
-}
-
-variable "nlb_sg_id" {
-  description = "String(required): ID of the security group attached to the load balancer"
-  default     = -1
 }
 
 variable "target_port" {
