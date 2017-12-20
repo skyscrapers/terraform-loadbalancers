@@ -190,7 +190,6 @@ Setup an NLB with related resources.
 * [`arn`]: ARN of the NLB
 * [`dns_name`]: DNS name of the NLB
 * [`zone_id`]: DNS zone ID of the NLB
-* [`sg_id`]: ID of the NLB security group
 
 ### Example
 
@@ -209,7 +208,13 @@ module "nlb" {
 }
 ```
 
-## alb_listener
+## nlb_listener
+
+A network load balancer can't be associated with a security group like an application
+load balancer can be configured. But to limit allowed traffic over the load balancer
+to your back-end services, please refer to the AWS documentation on how to 
+configure [the security group of the instances](http://docs.aws.amazon.com/elasticloadbalancing/latest/network/target-group-register-targets.html#target-security-groups)
+part of your target group.
 
 ### Available variables
 
@@ -218,7 +223,6 @@ module "nlb" {
 * [`project`]: String(required): The current project
 * [`vpc_id`]: String(required): The ID of the VPC in which to deploy
 * [`nlb_arn`]: String(required): ARN of the NLB on which this listener will be attached.
-* [`nlb_sg_id`]: String(required): ID of the security group attached to the load balancer
 * [`default_target_group_arn`]: String(optional, ""): Default target group ARN to add to the HTTP listener. Creates a default target group if not set
 * [`ingress_port`]: Int(optional, -1): Ingress port the NLB is listening to
 * [`target_port`]: Int(optional, 80): The port of which targets receive traffic
@@ -227,7 +231,6 @@ module "nlb" {
 * [`target_health_timeout`]: Int(optional, 5): Time in seconds to wait for a successful health check response
 * [`target_health_healthy_threshold`]: Int(optional, 5): The number of consecutive health checks successes before considering a target healthy
 * [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
-* [`source_subnet_cidrs`]: List(optional, ["0.0.0.0/0"]): Subnet CIDR blocks from where the NLB will receive traffic
 * [`tags`]: Map(optional, {}): Optional tags
 
 ### Output
@@ -239,13 +242,12 @@ module "nlb" {
 
 ```hcl
 module "nlb_listener_concourse_workers" {
-  source                       = "github.com/skyscrapers/terraform-loadbalancers//nlb_listener?ref=5.0.0"
+  source                = "github.com/skyscrapers/terraform-loadbalancers//nlb_listener?ref=5.0.0"
   environment           = "${terraform.workspace}"
   project               = "${var.project}"
   vpc_id                = "${data.terraform_remote_state.static.vpc_id}"
   name_prefix           = "def"
   nlb_arn               = "${module.nlb.arn}"
-  nlb_sg_id             = "${module.nlb.sg_id}"
   ingress_port          = 4800
 
   tags = {

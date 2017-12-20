@@ -18,11 +18,6 @@ variable "nlb_arn" {
   description = "String(required): ARN of the NLB on which this listener will be attached."
 }
 
-variable "nlb_sg_id" {
-  description = "String(required): ID of the security group attached to the load balancer"
-  default     = -1
-}
-
 variable "default_target_group_arn" {
   description = "String(optional, \"\"): Default target group ARN to add to the HTTP listener. Creates a default target group if not set"
   default     = ""
@@ -60,12 +55,6 @@ variable "target_health_healthy_threshold" {
 variable "target_health_unhealthy_threshold" {
   description = "Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy"
   default     = 2
-}
-
-variable "source_subnet_cidrs" {
-  description = "List(optional, [\"0.0.0.0/0\"]): Subnet CIDR blocks from where the NLB will receive traffic"
-  type        = "list"
-  default     = ["0.0.0.0/0"]
 }
 
 variable "tags" {
