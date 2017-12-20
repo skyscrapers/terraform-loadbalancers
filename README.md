@@ -182,7 +182,6 @@ Setup an NLB with related resources.
 * [`internal`]: Bool(optional, false): Is this an internal NLB or not
 * [`subnets`]: List(required): Subnets to deploy the NLB in
 * [`enable_deletion_protection`]: Bool(optional, false): Whether to enable deletion protection of this NLB or not
-* [`access_logs`]: List(optional, []): An NLB access_logs block
 * [`tags`]: Map(optional, {}): Optional tags
 
 ### Output
@@ -203,10 +202,6 @@ module "nlb" {
   project                  = "${var.project}"
   vpc_id                   = "${data.terraform_remote_state.shared_static.vpc_id}"
   subnets                  = "${data.terraform_remote_state.shared_static.public_lb_subnets}"
-
-  access_logs = [{
-    bucket = "nlb-logs-bucket"
-  }]
 
   tags = {
     Role = "loadbalancer"

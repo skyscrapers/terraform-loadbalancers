@@ -29,12 +29,6 @@ variable "enable_deletion_protection" {
   default     = false
 }
 
-variable "access_logs" {
-  description = "List(optional, []): An NLB access_logs block"
-  type        = "list"
-  default     = []
-}
-
 variable "tags" {
   description = "Map(optional, {}): Optional tags"
   type        = "map"
