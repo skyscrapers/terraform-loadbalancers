@@ -17,8 +17,3 @@ output "zone_id" {
   description = "DNS zone ID of the NLB"
   value       = "${aws_lb.nlb.zone_id}"
 }
-
-output "sg_id" {
-  description = "ID of the NLB security group"
-  value       = "${aws_security_group.sg_nlb.id}"
-}
