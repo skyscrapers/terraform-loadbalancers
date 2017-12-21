@@ -36,7 +36,7 @@ resource "aws_lb_listener" "listener" {
 
   default_action {
     # Using join with resource.* as workaround for https://github.com/hashicorp/hil/issues/50
-    target_group_arn = "${var.create_default_target_group == "" ? join(" ", aws_lb_target_group.default.*.arn) : var.default_target_group_arn}"
+    target_group_arn = "${var.create_default_target_group ? join(" ", aws_lb_target_group.default.*.arn) : var.default_target_group_arn}"
     type             = "forward"
   }
 }
