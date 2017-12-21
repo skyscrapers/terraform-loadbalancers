@@ -28,7 +28,7 @@ variable "default_target_group_arn" {
 }
 
 variable "create_default_target_group" {
-  description = "String(optional, true): Weather to creates or not a default target group if not set"
+  description = "String(optional, true): Whether to creates or not a default target group if not set"
   default     = true
 }
 
