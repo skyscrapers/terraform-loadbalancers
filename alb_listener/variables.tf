@@ -23,8 +23,13 @@ variable "alb_sg_id" {
 }
 
 variable "default_target_group_arn" {
-  description = "String(optional, \"\"): Default target group ARN to add to the HTTP listener. Creates a default target group if not set"
+  description = "String(optional, \"\"): Default target group ARN to add to the HTTP listener. If this value is set please set create_default_target_group to false"
   default     = ""
+}
+
+variable "create_default_target_group" {
+  description = "String(optional, true): Weather to creates or not a default target group if not set"
+  default     = true
 }
 
 variable "ingress_port" {

@@ -61,7 +61,8 @@ module "alb" {
 * [`vpc_id`]: String(required): The ID of the VPC in which to deploy
 * [`alb_arn`]: String(required): ARN of the ALB on which this listener will be attached.
 * [`alb_sg_id`]: String(required): ID of the security group attached to the load balancer
-* [`default_target_group_arn`]: String(optional, ""): Default target group ARN to add to the HTTP listener. Creates a default target group if not set
+* [`default_target_group_arn`]: String(optional, ""): Default target group ARN to add to the HTTP listener. If this value is set please set `create_default_target_group` to false
+* [`create_default_target_group`]: String(optional, true): Weather to creates or not a default target group if not set 
 * [`ingress_port`]: Int(optional, -1): Ingress port the ALB is listening to
 * [`https_certificate_arn`]: String(optional, ""): IAM ARN of the SSL certificate for the HTTPS listener
 * [`target_port`]: Int(optional, 80): The port of which targets receive traffic
@@ -112,9 +113,9 @@ Create an ALB listener\_rule and attached target\_group
 
 *Future work:*
 
-Add support for registering additional certificates on an LB listener from the `alb_rule_target` module. 
-While adding certificates on an ALB listener is supported in the console/cli/sdk, it is not yet integrated 
-in the Terraform AWS provider. Request was filed as https://github.com/terraform-providers/terraform-provider-aws/issues/1853 
+Add support for registering additional certificates on an LB listener from the `alb_rule_target` module.
+While adding certificates on an ALB listener is supported in the console/cli/sdk, it is not yet integrated
+in the Terraform AWS provider. Request was filed as https://github.com/terraform-providers/terraform-provider-aws/issues/1853
 and the corresponding PR is https://github.com/terraform-providers/terraform-provider-aws/pull/2686
 
 ### Available variables
@@ -212,7 +213,7 @@ module "nlb" {
 
 A network load balancer can't be associated with a security group like an application
 load balancer can be configured. But to limit allowed traffic over the load balancer
-to your back-end services, please refer to the AWS documentation on how to 
+to your back-end services, please refer to the AWS documentation on how to
 configure [the security group of the instances](http://docs.aws.amazon.com/elasticloadbalancing/latest/network/target-group-register-targets.html#target-security-groups)
 part of your target group.
 
