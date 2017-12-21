@@ -62,7 +62,7 @@ module "alb" {
 * [`alb_arn`]: String(required): ARN of the ALB on which this listener will be attached.
 * [`alb_sg_id`]: String(required): ID of the security group attached to the load balancer
 * [`default_target_group_arn`]: String(optional, ""): Default target group ARN to add to the HTTP listener. If this value is set please set `create_default_target_group` to false
-* [`create_default_target_group`]: String(optional, true): Weather to creates or not a default target group if not set 
+* [`create_default_target_group`]: String(optional, true): Whether to creates or not a default target group if not set 
 * [`ingress_port`]: Int(optional, -1): Ingress port the ALB is listening to
 * [`https_certificate_arn`]: String(optional, ""): IAM ARN of the SSL certificate for the HTTPS listener
 * [`target_port`]: Int(optional, 80): The port of which targets receive traffic
