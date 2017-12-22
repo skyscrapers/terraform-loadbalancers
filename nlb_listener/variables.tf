@@ -42,19 +42,9 @@ variable "target_health_interval" {
   default     = 30
 }
 
-variable "target_health_timeout" {
-  description = "Int(optional, 5): Time in seconds to wait for a successful health check response"
-  default     = 5
-}
-
-variable "target_health_healthy_threshold" {
+variable "target_health_threshold" {
   description = "Int(optional, 5): The number of consecutive health checks successes before considering a target healthy"
   default     = 5
-}
-
-variable "target_health_unhealthy_threshold" {
-  description = "Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy"
-  default     = 2
 }
 
 variable "tags" {

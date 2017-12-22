@@ -6,16 +6,15 @@ resource "aws_lb_target_group" "default" {
   name_prefix = "${var.name_prefix}"
 
   port                 = "${var.target_port}"
-  protocol             = "tcp"
+  protocol             = "TCP"
   vpc_id               = "${var.vpc_id}"
   deregistration_delay = "${var.target_deregistration_delay}"
 
   health_check {
     interval            = "${var.target_health_interval}"
-    timeout             = "${var.target_health_timeout}"
-    healthy_threshold   = "${var.target_health_healthy_threshold}"
-    unhealthy_threshold = "${var.target_health_unhealthy_threshold}"
-    protocol            = "tcp"
+    healthy_threshold   = "${var.target_health_threshold}"
+    unhealthy_threshold = "${var.target_health_threshold}"
+    protocol            = "TCP"
   }
 
   tags = "${merge("${var.tags}",
@@ -28,7 +27,7 @@ resource "aws_lb_target_group" "default" {
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = "${var.nlb_arn}"
   port              = "${var.ingress_port}"
-  protocol          = "tcp"
+  protocol          = "TCP"
 
   default_action {
     # Using join with resource.* as workaround for https://github.com/hashicorp/hil/issues/50
