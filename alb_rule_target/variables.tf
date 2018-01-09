@@ -83,6 +83,11 @@ variable "target_health_matcher" {
   default     = 200
 }
 
+variable "target_health_protocol" {
+  description = "String(optional): The protocol to use for the health check. If not set, it will use the same protocal as target_protocol"
+  default     = ""
+}
+
 variable "tags" {
   description = "Map(optional, {}): Optional tags"
   type        = "map"

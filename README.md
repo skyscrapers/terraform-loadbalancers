@@ -62,7 +62,7 @@ module "alb" {
 * [`alb_arn`]: String(required): ARN of the ALB on which this listener will be attached.
 * [`alb_sg_id`]: String(required): ID of the security group attached to the load balancer
 * [`default_target_group_arn`]: String(optional, ""): Default target group ARN to add to the HTTP listener. If this value is set please set `create_default_target_group` to false
-* [`create_default_target_group`]: String(optional, true): Whether to creates or not a default target group if not set 
+* [`create_default_target_group`]: String(optional, true): Whether to creates or not a default target group if not set
 * [`ingress_port`]: Int(optional, -1): Ingress port the ALB is listening to
 * [`https_certificate_arn`]: String(optional, ""): IAM ARN of the SSL certificate for the HTTPS listener
 * [`target_port`]: Int(optional, 80): The port of which targets receive traffic
@@ -75,6 +75,7 @@ module "alb" {
 * [`target_health_healthy_threshold`]: Int(optional, 5): The number of consecutive health checks successes before considering a target healthy
 * [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
 * [`target_health_matcher`]: Int(optional, 200): The HTTP codes to use when checking for a successful response from a target
+* [`target_health_protocol`]: String(optional): The protocol to use for the health check. If not set, it will use the same protocal as target_protocol
 * [`source_subnet_cidrs`]: List(optional, ["0.0.0.0/0"]): Subnet CIDR blocks from where the ALB will receive traffic
 * [`tags`]: Map(optional, {}): Optional tags
 
@@ -138,7 +139,7 @@ and the corresponding PR is https://github.com/terraform-providers/terraform-pro
 * [`target_health_healthy_threshold`]: Int(optional, 5): The number of consecutive health checks successes before considering a target healthy
 * [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
 * [`target_health_matcher`]: Int(optional, 200): The HTTP codes to use when checking for a successful response from a target
-* [`target_health_protocol`]: String(optional, HTTP): The protocol to use for the healthcheck
+* [`target_health_protocol`]: String(optional): The protocol to use for the health check. If not set, it will use the same protocal as target_protocol
 * [`tags`]: Map(optional, {}): Optional tags
 
 ### Output
