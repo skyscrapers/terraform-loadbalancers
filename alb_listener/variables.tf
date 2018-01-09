@@ -100,8 +100,8 @@ variable "source_subnet_cidrs" {
 }
 
 variable "target_health_protocol" {
-  default     = "HTTP"
-  description = "Protocol to use for the healthcheck"
+  description = "String(optional): The protocol to use for the health check. If not set, it will use the same protocal as target_protocol"
+  default     = ""
 }
 
 variable "tags" {

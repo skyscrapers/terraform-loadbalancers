@@ -18,7 +18,7 @@ resource "aws_lb_target_group" "default" {
     healthy_threshold   = "${var.target_health_healthy_threshold}"
     unhealthy_threshold = "${var.target_health_unhealthy_threshold}"
     matcher             = "${var.target_health_matcher}"
-    protocol            = "${var.target_health_protocol}"
+    protocol            = "${var.target_health_protocol == "" ? var.target_protocol : var.target_health_protocol}"
   }
 
   tags = "${merge("${var.tags}",
