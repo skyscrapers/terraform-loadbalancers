@@ -140,6 +140,7 @@ and the corresponding PR is https://github.com/terraform-providers/terraform-pro
 * [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
 * [`target_health_matcher`]: Int(optional, 200): The HTTP codes to use when checking for a successful response from a target
 * [`target_health_protocol`]: String(optional): The protocol to use for the health check. If not set, it will use the same protocal as target_protocol
+* [`target_type`]: String(optional, "instance"): The type of target that you must specify when registering targets with this target group. The possible values are instance (targets are specified by instance ID) or ip (targets are specified by IP address).
 * [`tags`]: Map(optional, {}): Optional tags
 
 ### Output

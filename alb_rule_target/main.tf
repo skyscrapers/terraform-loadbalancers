@@ -20,6 +20,7 @@ resource "aws_alb_target_group" "target" {
   vpc_id               = "${var.vpc_id}"
   deregistration_delay = "${var.target_deregistration_delay}"
   stickiness           = ["${var.target_stickiness}"]
+  target_type          = "${var.target_type}"
 
   health_check {
     interval            = "${var.target_health_interval}"
