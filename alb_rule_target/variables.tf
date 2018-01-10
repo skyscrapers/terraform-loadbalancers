@@ -93,3 +93,8 @@ variable "tags" {
   type        = "map"
   default     = {}
 }
+
+variable "target_type" {
+  description = "The type of target that you must specify when registering targets with this target group. The possible values are instance (targets are specified by instance ID) or ip (targets are specified by IP address). The default is instance"
+  default     = "instance"
+}
