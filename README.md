@@ -234,6 +234,7 @@ part of your target group.
 * [`target_health_timeout`]: Int(optional, 5): Time in seconds to wait for a successful health check response
 * [`target_health_healthy_threshold`]: Int(optional, 5): The number of consecutive health checks successes before considering a target healthy
 * [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
+* [`target_type`]: String(optional, "instance"): The type of target that you must specify when registering targets with this target group. The possible values are instance (targets are specified by instance ID) or ip (targets are specified by IP address).
 * [`tags`]: Map(optional, {}): Optional tags
 
 ### Output

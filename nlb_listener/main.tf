@@ -9,6 +9,7 @@ resource "aws_lb_target_group" "default" {
   protocol             = "TCP"
   vpc_id               = "${var.vpc_id}"
   deregistration_delay = "${var.target_deregistration_delay}"
+  target_type          = "${var.target_type}"
 
   health_check {
     interval            = "${var.target_health_interval}"
