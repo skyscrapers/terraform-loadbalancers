@@ -9,6 +9,10 @@ variable "backend_security_groups" {
   type        = "list"
 }
 
+variable "backend_security_groups_count" {
+  description = "The number of security groups passed in the `backend_security_groups` variable"
+}
+
 variable "subnets" {
   description = "A list of subnet IDs to attach to the ELB."
   type        = "list"
