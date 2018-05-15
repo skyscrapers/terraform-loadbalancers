@@ -1,5 +1,5 @@
 resource "aws_elb" "elb" {
-  name                        = "${var.project}-${var.environment}-${var.name}-elb"
+  name                        = "${var.project}-${var.environment}-${var.name}"
   subnets                     = ["${var.subnets}"]
   internal                    = "${var.internal}"
   cross_zone_load_balancing   = true
@@ -39,7 +39,7 @@ resource "aws_elb" "elb" {
   }
 
   tags {
-    Name        = "${var.project}-${var.environment}-${var.name}-elb"
+    Name        = "${var.project}-${var.environment}-${var.name}"
     Environment = "${var.environment}"
     Project     = "${var.project}"
   }
