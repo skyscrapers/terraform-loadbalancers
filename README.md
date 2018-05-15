@@ -272,6 +272,7 @@ module "nlb_listener_concourse_workers" {
  * [`health_target`]: String(required): The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_security_groups`]: List(required): The security groups of the ELB backends instances
+ * [`backend_security_groups_count`]: Integer(required): The number of security groups passed in the `backend_security_groups` variable. This is needed in case the provided security groups are not previously created, as at the moment [the value of 'count' cannot be computed](https://github.com/hashicorp/terraform/issues/12570)
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -305,13 +306,13 @@ module "nlb_listener_concourse_workers" {
 
 ```hcl
 module "elb" {
-  source                     = "github.com/skyscrapers/terraform-loadbalancers//elb_no_ssl_no_s3logs"
-  name                       = "frontend"
-  subnets                    = ["${module.vpc.frontend_public_subnets}"]
-  project                    = "myapp"
-  health_target              = "http:80/health_check"
-  backend_security_groups    = ["${module.sg.sg_app_id}"]
-
+  source                        = "github.com/skyscrapers/terraform-loadbalancers//elb_no_ssl_no_s3logs"
+  name                          = "frontend"
+  subnets                       = ["${module.vpc.frontend_public_subnets}"]
+  project                       = "myapp"
+  health_target                 = "http:80/health_check"
+  backend_security_groups       = ["${module.sg.sg_app_id}"]
+  backend_security_groups_count = 1
 }
 ```
 
@@ -326,6 +327,7 @@ module "elb" {
  * [`access_logs_bucket`]: String(required): The S3 bucket name to store the logs in.
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_security_groups`]: List(required): The security groups of the ELB backends instances
+ * [`backend_security_groups_count`]: Integer(required): The number of security groups passed in the `backend_security_groups` variable. This is needed in case the provided security groups are not previously created, as at the moment [the value of 'count' cannot be computed](https://github.com/hashicorp/terraform/issues/12570)
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -361,14 +363,15 @@ module "elb" {
 
 ```hcl
 module "elb" {
-  source                    = "github.com/skyscrapers/terraform-loadbalancers//elb_no_ssl_with_s3logs"
-  name                      = "frontend"
-  subnets                   = ["${module.vpc.frontend_public_subnets}"]
-  project                   = "myapp"
-  health_target             = "http:80/health_check"
-  access_logs_bucket        = "elb_logs"
-  access_logs_bucket_prefix = "myapp/frontend/"
-  backend_security_groups   = ["${module.sg.sg_app_id}"]
+  source                        = "github.com/skyscrapers/terraform-loadbalancers//elb_no_ssl_with_s3logs"
+  name                          = "frontend"
+  subnets                       = ["${module.vpc.frontend_public_subnets}"]
+  project                       = "myapp"
+  health_target                 = "http:80/health_check"
+  access_logs_bucket            = "elb_logs"
+  access_logs_bucket_prefix     = "myapp/frontend/"
+  backend_security_groups       = ["${module.sg.sg_app_id}"]
+  backend_security_groups_count = 1
 }
 ```
 
@@ -382,6 +385,7 @@ module "elb" {
  * [`health_target`]: String(required): The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_security_groups`]: List(required): The security groups of the ELB backend instances
+ * [`backend_security_groups_count`]: Integer(required): The number of security groups passed in the `backend_security_groups` variable. This is needed in case the provided security groups are not previously created, as at the moment [the value of 'count' cannot be computed](https://github.com/hashicorp/terraform/issues/12570)
  * [`ssl_certificate_id`]: String(required): The ARN of an SSL certificate you have uploaded to AWS IAM.
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
@@ -415,13 +419,13 @@ module "elb" {
 
 ```hcl
 module "elb" {
-  source                     = "github.com/skyscrapers/terraform-loadbalancers//elb_only_ssl_no_s3logs"
-  name                       = "frontend"
-  subnets                    = ["${module.vpc.frontend_public_subnets}"]
-  project                    = "myapp"
-  health_target              = "http:443/health_check"
-  backend_security_groups    = ["${module.sg.sg_app_id}"]
-
+  source                        = "github.com/skyscrapers/terraform-loadbalancers//elb_only_ssl_no_s3logs"
+  name                          = "frontend"
+  subnets                       = ["${module.vpc.frontend_public_subnets}"]
+  project                       = "myapp"
+  health_target                 = "http:443/health_check"
+  backend_security_groups       = ["${module.sg.sg_app_id}"]
+  backend_security_groups_count = 1
 }
 ```
 
@@ -436,6 +440,7 @@ module "elb" {
  * [`access_logs_bucket`]: String(required): The S3 bucket name to store the logs in.
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_security_groups`]: List(required): The security groups of the ELB backends instances
+ * [`backend_security_groups_count`]: Integer(required): The number of security groups passed in the `backend_security_groups` variable. This is needed in case the provided security groups are not previously created, as at the moment [the value of 'count' cannot be computed](https://github.com/hashicorp/terraform/issues/12570)
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -471,15 +476,15 @@ module "elb" {
 
 ```hcl
 module "elb" {
-  source                    = "github.com/skyscrapers/terraform-loadbalancers//elb_only_ssl_with_s3logs"
-  name                      = "frontend"
-  subnets                   = ["${module.vpc.frontend_public_subnets}"]
-  project                   = "myapp"
-  health_target             = "http:443/health_check"
-  access_logs_bucket        = "elb_logs"
-  access_logs_bucket_prefix = "myapp/frontend/"
-  backend_security_groups   = ["${module.sg.sg_app_id}"]
-
+  source                        = "github.com/skyscrapers/terraform-loadbalancers//elb_only_ssl_with_s3logs"
+  name                          = "frontend"
+  subnets                       = ["${module.vpc.frontend_public_subnets}"]
+  project                       = "myapp"
+  health_target                 = "http:443/health_check"
+  access_logs_bucket            = "elb_logs"
+  access_logs_bucket_prefix     = "myapp/frontend/"
+  backend_security_groups       = ["${module.sg.sg_app_id}"]
+  backend_security_groups_count = 1
 }
 ```
 
@@ -493,6 +498,7 @@ module "elb" {
  * [`health_target`]: String(required): The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_security_groups`]: List(required): The security groups of the ELB backends instances
+ * [`backend_security_groups_count`]: Integer(required): The number of security groups passed in the `backend_security_groups` variable. This is needed in case the provided security groups are not previously created, as at the moment [the value of 'count' cannot be computed](https://github.com/hashicorp/terraform/issues/12570)
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -529,13 +535,13 @@ module "elb" {
 
 ```hcl
 module "elb" {
-  source                     = "github.com/skyscrapers/terraform-loadbalancers//elb_with_ssl_no_s3logs"
-  name                       = "frontend"
-  subnets                    = ["${module.vpc.frontend_public_subnets}"]
-  project                    = "myapp"
-  health_target              = "http:443/health_check"
-  backend_security_groups    = ["${module.sg.sg_app_id}"]
-
+  source                        = "github.com/skyscrapers/terraform-loadbalancers//elb_with_ssl_no_s3logs"
+  name                          = "frontend"
+  subnets                       = ["${module.vpc.frontend_public_subnets}"]
+  project                       = "myapp"
+  health_target                 = "http:443/health_check"
+  backend_security_groups       = ["${module.sg.sg_app_id}"]
+  backend_security_groups_count = 1
 }
 ```
 
@@ -550,6 +556,7 @@ module "elb" {
  * [`access_logs_bucket`]: String(required): The S3 bucket name to store the logs in.
  * [`environment`]: String(required): How do you want to call your environment, this is helpful if you have more than 1 VPC.
  * [`backend_security_groups`]: List(required): The security group of the ELB backends instances
+ * [`backend_security_groups_count`]: Integer(required): The number of security groups passed in the `backend_security_groups` variable. This is needed in case the provided security groups are not previously created, as at the moment [the value of 'count' cannot be computed](https://github.com/hashicorp/terraform/issues/12570)
  * [`internal`]: Boolean(optional):default to false. If true, ELB will be an internal ELB.
  * [`idle_timeout`]: Integer(optional):default 60. The time in seconds that the connection is allowed to be idle.
  * [`connection_draining`]: Boolean(optional):default true. Boolean to enable connection draining.
@@ -589,14 +596,14 @@ module "elb" {
 
 ```hcl
 module "elb" {
-  source                    = "github.com/skyscrapers/terraform-loadbalancers//elb_with_ssl_with_s3logs"
-  name                      = "frontend"
-  subnets                   = ["${module.vpc.frontend_public_subnets}"]
-  project                   = "myapp"
-  health_target             = "http:443/health_check"
-  access_logs_bucket        = "elb_logs"
-  access_logs_bucket_prefix = "myapp/frontend/"
-  backend_security_groups   = ["${module.sg.sg_app_id}"]
-
+  source                        = "github.com/skyscrapers/terraform-loadbalancers//elb_with_ssl_with_s3logs"
+  name                          = "frontend"
+  subnets                       = ["${module.vpc.frontend_public_subnets}"]
+  project                       = "myapp"
+  health_target                 = "http:443/health_check"
+  access_logs_bucket            = "elb_logs"
+  access_logs_bucket_prefix     = "myapp/frontend/"
+  backend_security_groups       = ["${module.sg.sg_app_id}"]
+  backend_security_groups_count = 1
 }
 ```
