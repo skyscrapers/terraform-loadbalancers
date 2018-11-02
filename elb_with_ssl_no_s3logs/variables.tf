@@ -109,3 +109,8 @@ variable "ingoing_allowed_ips" {
   default = ["0.0.0.0/0"]
   type    = "list"
 }
+
+variable "more_listeners" {
+  type    = "list"
+  default = []
+}
