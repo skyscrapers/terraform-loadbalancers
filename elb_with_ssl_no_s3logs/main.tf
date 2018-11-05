@@ -1,3 +1,21 @@
+locals {
+  listener = [
+    {
+      instance_port     = "${var.instance_port}"
+      instance_protocol = "${var.instance_protocol}"
+      lb_port           = "${var.lb_port}"
+      lb_protocol       = "${var.lb_protocol}"
+    },
+    {
+      instance_port      = "${var.instance_ssl_port}"
+      instance_protocol  = "${var.instance_ssl_protocol}"
+      lb_port            = "${var.lb_ssl_port}"
+      lb_protocol        = "${var.lb_ssl_protocol}"
+      ssl_certificate_id = "${var.ssl_certificate_id}"
+    },
+  ]
+}
+
 resource "aws_elb" "elb" {
   name                        = "${var.project}-${var.environment}-${var.name}"
   subnets                     = ["${var.subnets}"]
@@ -8,20 +26,7 @@ resource "aws_elb" "elb" {
   connection_draining_timeout = "${var.connection_draining_timeout}"
   security_groups             = ["${aws_security_group.elb.id}"]
 
-  listener {
-    instance_port     = "${var.instance_port}"
-    instance_protocol = "${var.instance_protocol}"
-    lb_port           = "${var.lb_port}"
-    lb_protocol       = "${var.lb_protocol}"
-  }
-
-  listener {
-    instance_port      = "${var.instance_ssl_port}"
-    instance_protocol  = "${var.instance_ssl_protocol}"
-    lb_port            = "${var.lb_ssl_port}"
-    lb_protocol        = "${var.lb_ssl_protocol}"
-    ssl_certificate_id = "${var.ssl_certificate_id}"
-  }
+  listener = "${concat(local.listener,var.custom_listeners)}"
 
   health_check {
     healthy_threshold   = "${var.healthy_threshold}"
