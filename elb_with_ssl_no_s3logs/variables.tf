@@ -110,7 +110,7 @@ variable "ingoing_allowed_ips" {
   type    = "list"
 }
 
-variable "more_listeners" {
+variable "custom_listeners" {
   type    = "list"
   default = []
 }

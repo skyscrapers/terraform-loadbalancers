@@ -515,7 +515,7 @@ module "elb" {
  * [`unhealthy_threshold`]: Integer(optional):default 2. The number of checks before the instance is declared unhealthy.
  * [`health_timeout`]: Integer(optional):default 3. The length of time before the check times out.
  * [`health_interval`]: Integer(optional):default 30. The interval between checks.
-
+ * [`custom_listeners`]: List(optional): default []. A list of maps of listeners. Here a link to the [available valuses](https://www.terraform.io/docs/providers/aws/r/elb.html#instance_port)
 #### Output
 
  * [`elb_id`]: String: The id of the ELB
