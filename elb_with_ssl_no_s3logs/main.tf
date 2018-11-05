@@ -26,7 +26,7 @@ resource "aws_elb" "elb" {
   connection_draining_timeout = "${var.connection_draining_timeout}"
   security_groups             = ["${aws_security_group.elb.id}"]
 
-  listener = "${concat(local.listener,var.more_listeners)}"
+  listener = "${concat(local.listener,var.custom_listeners)}"
 
   health_check {
     healthy_threshold   = "${var.healthy_threshold}"
