@@ -30,7 +30,7 @@ output "sg_id" {
 
 output "http_listener_id" {
   description = "ID of the ALB HTTP listener"
-  value       = "${aws_alb_listener.https.id}"
+  value       = "${aws_alb_listener.http.id}"
 }
 
 output "https_listener_id" {
