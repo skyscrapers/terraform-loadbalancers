@@ -1,7 +1,3 @@
-terraform {
-  required_version = ">= 0.12"
-}
-
 resource "aws_alb_listener_rule" "rule" {
   listener_arn = var.listener_arn
   priority     = var.listener_priority

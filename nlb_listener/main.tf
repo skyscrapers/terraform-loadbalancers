@@ -1,7 +1,3 @@
-terraform {
-  required_version = ">= 0.12"
-}
-
 resource "aws_lb_target_group" "default" {
   count = var.default_target_group_arn == "" ? 1 : 0
 

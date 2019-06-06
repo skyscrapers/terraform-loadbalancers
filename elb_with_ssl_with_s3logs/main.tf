@@ -1,7 +1,3 @@
-terraform {
-  required_version = ">= 0.12"
-}
-
 resource "aws_elb" "elb" {
   name                        = "${var.project}-${var.environment}-${var.name}"
   subnets                     = var.subnets

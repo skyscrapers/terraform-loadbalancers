@@ -1,7 +1,3 @@
-terraform {
-  required_version = ">= 0.12"
-}
-
 # Create a new load balancer
 resource "aws_lb" "alb" {
   load_balancer_type         = "application"
