@@ -1,12 +1,15 @@
-variable "project" {}
+variable "project" {
+}
 
-variable "environment" {}
+variable "environment" {
+}
 
-variable "name" {}
+variable "name" {
+}
 
 variable "backend_security_groups" {
   description = "The security groups of the ELB backends instances"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "backend_security_groups_count" {
@@ -15,7 +18,7 @@ variable "backend_security_groups_count" {
 
 variable "subnets" {
   description = "A list of subnet IDs to attach to the ELB."
-  type        = "list"
+  type        = list(string)
 }
 
 variable "internal" {
@@ -97,7 +100,7 @@ variable "health_timeout" {
 }
 
 variable "health_target" {
-  description = "The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}"
+  description = "The target of the check. Valid pattern is $${PROTOCOL}:$${PORT}$${PATH}"
 }
 
 variable "health_interval" {
@@ -107,10 +110,11 @@ variable "health_interval" {
 
 variable "ingoing_allowed_ips" {
   default = ["0.0.0.0/0"]
-  type    = "list"
+  type    = list(string)
 }
 
 variable "custom_listeners" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
+

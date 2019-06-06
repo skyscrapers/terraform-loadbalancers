@@ -29,7 +29,7 @@ variable "listener_condition_field" {
 
 variable "listener_condition_values" {
   description = "List(required): The path or host patterns to match. A maximum of 1 can be defined"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "target_port" {
@@ -49,7 +49,7 @@ variable "target_deregistration_delay" {
 
 variable "target_stickiness" {
   description = "List(optional, []): An ALB target_group stickiness block"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -90,7 +90,7 @@ variable "target_health_protocol" {
 
 variable "tags" {
   description = "Map(optional, {}): Optional tags"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
 
@@ -98,3 +98,4 @@ variable "target_type" {
   description = "The type of target that you must specify when registering targets with this target group. The possible values are instance (targets are specified by instance ID) or ip (targets are specified by IP address). The default is instance"
   default     = "instance"
 }
+

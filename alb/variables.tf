@@ -21,7 +21,7 @@ variable "internal" {
 
 variable "subnets" {
   description = "List(required): Subnets to deploy the ALB in"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "enable_deletion_protection" {
@@ -31,12 +31,13 @@ variable "enable_deletion_protection" {
 
 variable "access_logs" {
   description = "List(optional, []): An ALB access_logs block"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "tags" {
   description = "Map(optional, {}): Optional tags"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
+

@@ -54,6 +54,7 @@ variable "target_type" {
 
 variable "tags" {
   description = "Map(optional, {}): Optional tags"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
+
