@@ -5,7 +5,7 @@ locals {
 resource "aws_lb" "alb" {
   load_balancer_type         = "application"
   name_prefix                = var.name_prefix
-  name                       = var.name_prefix == null ? "${var.project}-${var.environment}-${var.name}" : null
+  name                       = var.name_prefix == null ? "${var.project}-${var.environment}-${var.name}-alb" : null
   internal                   = var.internal
   subnets                    = var.subnets
   security_groups            = [aws_security_group.sg_alb.id]

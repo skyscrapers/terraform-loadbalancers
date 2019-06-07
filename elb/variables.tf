@@ -43,12 +43,12 @@ variable "connection_draining_timeout" {
 
 variable "access_logs_bucket" {
   description = "The S3 bucket name to store the logs in."
-  default     = ""
+  default     = null
 }
 
 variable "access_logs_bucket_prefix" {
   description = "The S3 bucket prefix. Logs are stored in the root if not configured."
-  default     = ""
+  default     = null
 }
 
 variable "access_logs_interval" {
