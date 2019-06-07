@@ -1,5 +1,11 @@
 variable "name_prefix" {
-  description = "String(required): Name prefix of the ALB and security group"
+  description = "String(optional): Name prefix of the ALB and security group"
+  default     = null
+}
+
+variable "name" {
+  description = "String(optional): Name prefix of the ALB and security group"
+  default     = ""
 }
 
 variable "environment" {
@@ -31,8 +37,8 @@ variable "enable_deletion_protection" {
 
 variable "access_logs" {
   description = "List(optional, []): An ALB access_logs block"
-  type        = list(string)
-  default     = []
+  type        = list(map(string))
+  default     = null
 }
 
 variable "tags" {
@@ -40,4 +46,3 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-
