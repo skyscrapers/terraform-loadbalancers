@@ -17,10 +17,10 @@ Setup an ALB with related resources.
 * [`project`]: String(required): The current project
 * [`vpc_id`]: String(required): The ID of the VPC in which to deploy
 * [`internal`]: Bool(optional, false): Is this an internal ALB or not
-* [`subnets`]: List(required): Subnets to deploy the ALB in
+* [`subnets`]: List(string)(required): Subnets to deploy the ALB in
 * [`enable_deletion_protection`]: Bool(optional, false): Whether to enable deletion protection of this ALB or not
-* [`access_logs`]: List(optional, []): An ALB access_logs block
-* [`tags`]: Map(optional, {}): Optional tags
+* [`access_logs`]: List(map(string))(optional, []): An ALB access_logs block
+* [`tags`]: Map(string)(optional, {}): Optional tags
 
 ### Output
 
@@ -68,7 +68,7 @@ module "alb" {
 * [`target_port`]: Int(optional, 80): The port of which targets receive traffic
 * [`target_protocol`]: String(optional, "HTTP"): The protocol to sue for routing traffic to the targets
 * [`target_deregistration_delay`]: Int(optional, 30): The time in seconds before deregistering the target
-* [`target_stickiness`]: List(optional, []): An ALB target_group stickiness block
+* [`target_stickiness`]: List(string)(optional, []): An ALB target_group stickiness block
 * [`target_health_interval`]: Int(optional, 30): Time in seconds between target health checks
 * [`target_health_path`]: String(optional, "/"): Path for the health check request
 * [`target_health_timeout`]: Int(optional, 5): Time in seconds to wait for a successful health check response
@@ -76,8 +76,8 @@ module "alb" {
 * [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
 * [`target_health_matcher`]: Int(optional, 200): The HTTP codes to use when checking for a successful response from a target
 * [`target_health_protocol`]: String(optional): The protocol to use for the health check. If not set, it will use the same protocal as target_protocol
-* [`source_subnet_cidrs`]: List(optional, ["0.0.0.0/0"]): Subnet CIDR blocks from where the ALB will receive traffic
-* [`tags`]: Map(optional, {}): Optional tags
+* [`source_subnet_cidrs`]: List(string)(optional, ["0.0.0.0/0"]): Subnet CIDR blocks from where the ALB will receive traffic
+* [`tags`]: Map(string)(optional, {}): Optional tags
 
 ### Output
 
@@ -128,11 +128,11 @@ and the corresponding PR is https://github.com/terraform-providers/terraform-pro
 * [`listener_arn`]: String(required): The ARN of the listener to which to attach the rule
 * [`listener_priority`]: Int(required): The priority for the rule
 * [`listener_condition_field`]: String(optional, \"path-pattern\"): Must be one of `path-pattern` for path based routing or `host-header` for host based routing
-* [`listener_condition_values`]: List(required): The path or host patterns to match. A maximum of 1 can be defined
+* [`listener_condition_values`]: List(string)(required): The path or host patterns to match. A maximum of 1 can be defined
 * [`target_port`]: Int(optional, 80): The port of which targets receive traffic
 * [`target_protocol`]: String(optional, "HTTP"): The protocol to sue for routing traffic to the targets
 * [`target_deregistration_delay`]: Int(optional, 30): The time in seconds before deregistering the target
-* [`target_stickiness`]: List(optional, []): An ALB target_group stickiness block
+* [`target_stickiness`]: List(string)(optional, []): An ALB target_group stickiness block
 * [`target_health_interval`]: Int(optional, 30): Time in seconds between target health checks
 * [`target_health_path`]: String(optional, "/"): Path for the health check request
 * [`target_health_timeout`]: Int(optional, 5): Time in seconds to wait for a successful health check response
@@ -141,7 +141,7 @@ and the corresponding PR is https://github.com/terraform-providers/terraform-pro
 * [`target_health_matcher`]: Int(optional, 200): The HTTP codes to use when checking for a successful response from a target
 * [`target_health_protocol`]: String(optional): The protocol to use for the health check. If not set, it will use the same protocal as target_protocol
 * [`target_type`]: String(optional, "instance"): The type of target that you must specify when registering targets with this target group. The possible values are instance (targets are specified by instance ID) or ip (targets are specified by IP address).
-* [`tags`]: Map(optional, {}): Optional tags
+* [`tags`]: Map(string)(optional, {}): Optional tags
 
 ### Output
 
@@ -183,9 +183,9 @@ Setup an NLB with related resources.
 * [`project`]: String(required): The current project
 * [`vpc_id`]: String(required): The ID of the VPC in which to deploy
 * [`internal`]: Bool(optional, false): Is this an internal NLB or not
-* [`subnets`]: List(required): Subnets to deploy the NLB in
+* [`subnets`]: List(string)(required): Subnets to deploy the NLB in
 * [`enable_deletion_protection`]: Bool(optional, false): Whether to enable deletion protection of this NLB or not
-* [`tags`]: Map(optional, {}): Optional tags
+* [`tags`]: Map(string)(optional, {}): Optional tags
 
 ### Output
 
@@ -235,7 +235,7 @@ part of your target group.
 * [`target_health_healthy_threshold`]: Int(optional, 5): The number of consecutive health checks successes before considering a target healthy
 * [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
 * [`target_type`]: String(optional, "instance"): The type of target that you must specify when registering targets with this target group. The possible values are instance (targets are specified by instance ID) or ip (targets are specified by IP address).
-* [`tags`]: Map(optional, {}): Optional tags
+* [`tags`]: Map(string)(optional, {}): Optional tags
 
 ### Output
 
@@ -265,7 +265,7 @@ module "nlb_listener_concourse_workers" {
 #### Available variables
 
  * [`name`]: String(required): Name of the ELB
- * [`subnets`]: List(required): A list of subnet IDs to attach to the ELB.
+ * [`subnets`]: List(string)(required): A list of subnet IDs to attach to the ELB.
  * [`project`]: String(required): The current project
  * [`health_target`]: String(required): The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}
  * [`access_logs_bucket`]: String(required): The S3 bucket name to store the logs in.
@@ -305,8 +305,8 @@ module "nlb_listener_concourse_workers" {
  * [`sg_owner_id`]: String: The owner ID.
  * [`sg_name`]: String: The name of the security group
  * [`sg_description`]: String: The description of the security group
- * [`sg_ingress`]: Map: The ingress rules.
- * [`sg_egress`]: Map: The egress rules.
+ * [`sg_ingress`]: Map(string): The ingress rules.
+ * [`sg_egress`]: Map(string): The egress rules.
 
 #### Example
 

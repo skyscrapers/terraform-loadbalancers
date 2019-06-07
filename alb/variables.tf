@@ -36,7 +36,7 @@ variable "enable_deletion_protection" {
 }
 
 variable "access_logs" {
-  description = "List(optional, []): An ALB access_logs block"
+  description = "An ALB access_logs block"
   type        = list(map(string))
   default     = null
 }
