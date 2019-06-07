@@ -314,7 +314,7 @@ module "nlb_listener_concourse_workers" {
 module "elb" {
   source                        = "github.com/skyscrapers/terraform-loadbalancers//elb"
   name                          = "frontend"
-  subnets                       = [module.vpc.frontend_public_subnets]
+  subnets                       = module.vpc.frontend_public_subnets
   project                       = "myapp"
   health_target                 = "http:443/health_check"
   access_logs_bucket            = "elb_logs"

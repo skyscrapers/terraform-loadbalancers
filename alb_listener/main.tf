@@ -12,10 +12,6 @@ resource "aws_lb_target_group" "default" {
   dynamic "stickiness" {
     for_each = [var.target_stickiness]
     content {
-      # TF-UPGRADE-TODO: The automatic upgrade tool can't predict
-      # which keys might be set in maps assigned here, so it has
-      # produced a comprehensive set here. Consider simplifying
-      # this after confirming which keys can be set in practice.
 
       cookie_duration = lookup(stickiness.value, "cookie_duration", null)
       enabled         = lookup(stickiness.value, "enabled", null)
