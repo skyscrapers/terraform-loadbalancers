@@ -287,6 +287,7 @@ module "nlb_listener_concourse_workers" {
  * [`instance_ssl_protocol`]: String(optional):default http. The protocol to use to the instance. Valid values are HTTP, HTTPS, TCP, or SSL"
  * [`lb_ssl_port`]: Integer(optional):default 443. The port to listen on for the load balancer
  * [`lb_ssl_protocol`]: String(optional):default https. The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL
+ * [`ssl_certificate_id`]: String(optional, null): The ARN of an SSL certificate you have uploaded to AWS IAM. If specified it will create an additional ssl listenerssl_certificate_id
  * [`healthy_threshold`]: Integer(optional):default 3. The number of checks before the instance is declared healthy.
  * [`unhealthy_threshold`]: Integer(optional):default 2. The number of checks before the instance is declared unhealthy.
  * [`health_timeout`]: Integer(optional):default 3. The length of time before the check times out.
