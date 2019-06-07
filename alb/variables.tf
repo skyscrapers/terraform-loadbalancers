@@ -1,6 +1,6 @@
 variable "name_prefix" {
   description = "String(optional): Name prefix of the ALB and security group"
-  default     = ""
+  default     = null
 }
 
 variable "name" {

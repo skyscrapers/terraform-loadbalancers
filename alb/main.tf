@@ -1,5 +1,5 @@
 locals {
-  name = var.name != null ? var.name : var.name_prefix
+  name = coalesce(var.name, var.name_prefix, "tf-lb")
 }
 # Create a new load balancer
 resource "aws_lb" "alb" {
