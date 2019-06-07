@@ -23,6 +23,7 @@ variable "subnets" {
 
 variable "internal" {
   description = "If true, ELB will be an internal ELB."
+  default     = false
 }
 
 variable "idle_timeout" {
@@ -42,6 +43,7 @@ variable "connection_draining_timeout" {
 
 variable "access_logs_bucket" {
   description = "The S3 bucket name to store the logs in."
+  default     = ""
 }
 
 variable "access_logs_bucket_prefix" {
@@ -55,10 +57,12 @@ variable "access_logs_interval" {
 }
 
 variable "access_logs_enabled" {
-  default = true
+  type    = bool
+  default = false
 }
 
 variable "instance_port" {
+  type        = number
   description = "The port on the instance to route to"
   default     = 80
 }
@@ -99,7 +103,8 @@ variable "lb_ssl_protocol" {
 }
 
 variable "ssl_certificate_id" {
-  description = " The ARN of an SSL certificate you have uploaded to AWS IAM. Only valid when lb_protocol is either HTTPS or SSL"
+  description = " The ARN of an SSL certificate you have uploaded to AWS IAM. If specified it will create an additional ssl listener"
+  default     = null
 }
 
 variable "healthy_threshold" {
@@ -130,4 +135,3 @@ variable "ingoing_allowed_ips" {
   default = ["0.0.0.0/0"]
   type    = list(string)
 }
-
