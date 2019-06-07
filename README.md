@@ -265,7 +265,6 @@ module "nlb_listener_concourse_workers" {
 
 #### Available variables
 
- * [`name_prefix`]: String(required): Name prefix of the ALB and security group
  * [`name`]: String(optional): Name prefix of the ALB and security group in the format var.project-var.environment-var.name
  * [`subnets`]: List(string)(required): A list of subnet IDs to attach to the ELB.
  * [`project`]: String(required): The current project

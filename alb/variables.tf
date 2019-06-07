@@ -1,11 +1,11 @@
 variable "name_prefix" {
   description = "String(optional): Name prefix of the ALB and security group"
-  default     = null
+  default     = ""
 }
 
 variable "name" {
-  description = "String(optional): Name prefix of the ALB and security group"
-  default     = ""
+  description = "String(optional): Name prefix of the ALB and security group in the format var.project-var.environment-var.name"
+  default     = null
 }
 
 variable "environment" {
