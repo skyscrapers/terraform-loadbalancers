@@ -4,7 +4,7 @@ locals {
 # Create a new load balancer
 resource "aws_lb" "alb" {
   load_balancer_type         = "application"
-  name_prefix                = var.name == null ? var.name_prefix : null
+  name_prefix                = var.name_prefix
   name                       = var.name != null ? "${var.project}-${var.environment}-${var.name}-alb" : null
   internal                   = var.internal
   subnets                    = var.subnets
