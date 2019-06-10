@@ -11,7 +11,7 @@ resource "aws_lb" "alb" {
   security_groups            = [aws_security_group.sg_alb.id]
   enable_deletion_protection = var.enable_deletion_protection
   dynamic "access_logs" {
-    for_each = var.access_logs == null ? [] : var.access_logs
+    for_each = var.access_logs == null ? [] : [var.access_logs]
     content {
       bucket  = access_logs.value.bucket
       enabled = lookup(access_logs.value, "enabled", null)
