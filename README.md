@@ -13,7 +13,7 @@ Setup an ALB with related resources.
 ### Available variables
 
 * [`name_prefix`]: String(optional): Name prefix of the ALB and security group
-* [`name`]: String(optional): Name prefix of the ALB and security group in the format var.project-var.environment-var.name
+* [`name`]: String(optional): Name part of the ALB and security group in the format var.project-var.environment-var.name
 * [`environment`]: String(required): Environment where this ALB is deployed, eg. staging
 * [`project`]: String(required): The current project
 * [`vpc_id`]: String(required): The ID of the VPC in which to deploy
@@ -265,7 +265,7 @@ module "nlb_listener_concourse_workers" {
 
 #### Available variables
 
- * [`name`]: String(optional): Name prefix of the ALB and security group in the format var.project-var.environment-var.name
+ * [`name`]: String(optional): Name component of the ELB and security group in the format var.project-var.environment-var.name
  * [`subnets`]: List(string)(required): A list of subnet IDs to attach to the ELB.
  * [`project`]: String(required): The current project
  * [`health_target`]: String(required): The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}

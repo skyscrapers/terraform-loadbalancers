@@ -10,7 +10,7 @@ resource "aws_lb_target_group" "default" {
   vpc_id               = var.vpc_id
   deregistration_delay = var.target_deregistration_delay
   dynamic "stickiness" {
-    for_each = [var.target_stickiness]
+    for_each = var.target_stickiness
     content {
 
       cookie_duration = lookup(stickiness.value, "cookie_duration", null)
