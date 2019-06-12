@@ -1,5 +1,11 @@
 variable "name_prefix" {
-  description = "String(required): Name prefix of the ALB and security group"
+  description = "String(optional): Name prefix of the ALB and security group"
+  default     = null
+}
+
+variable "name" {
+  description = "String(optional): Name prefix of the ALB and security group in the format var.project-var.environment-var.name"
+  default     = null
 }
 
 variable "environment" {
@@ -21,7 +27,7 @@ variable "internal" {
 
 variable "subnets" {
   description = "List(required): Subnets to deploy the ALB in"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "enable_deletion_protection" {
@@ -30,13 +36,13 @@ variable "enable_deletion_protection" {
 }
 
 variable "access_logs" {
-  description = "List(optional, []): An ALB access_logs block"
-  type        = "list"
-  default     = []
+  description = "An ALB access_logs block"
+  type        = map(string)
+  default     = null
 }
 
 variable "tags" {
   description = "Map(optional, {}): Optional tags"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }

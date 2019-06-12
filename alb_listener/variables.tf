@@ -59,7 +59,7 @@ variable "target_deregistration_delay" {
 
 variable "target_stickiness" {
   description = "List(optional, []): An ALB target_group stickiness block"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -95,7 +95,7 @@ variable "target_health_matcher" {
 
 variable "source_subnet_cidrs" {
   description = "List(optional, [\"0.0.0.0/0\"]): Subnet CIDR blocks from where the ALB will receive traffic"
-  type        = "list"
+  type        = list(string)
   default     = ["0.0.0.0/0"]
 }
 
@@ -106,6 +106,7 @@ variable "target_health_protocol" {
 
 variable "tags" {
   description = "Map(optional, {}): Optional tags"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
+

@@ -21,7 +21,7 @@ variable "internal" {
 
 variable "subnets" {
   description = "List(required): Subnets to deploy the NLB in"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "enable_deletion_protection" {
@@ -31,6 +31,7 @@ variable "enable_deletion_protection" {
 
 variable "tags" {
   description = "Map(optional, {}): Optional tags"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
+

@@ -1,12 +1,15 @@
-variable "project" {}
+variable "project" {
+}
 
-variable "environment" {}
+variable "environment" {
+}
 
-variable "name" {}
+variable "name" {
+}
 
 variable "backend_security_groups" {
   description = "The security groups of the ELB backends instances"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "backend_security_groups_count" {
@@ -15,11 +18,12 @@ variable "backend_security_groups_count" {
 
 variable "subnets" {
   description = "A list of subnet IDs to attach to the ELB."
-  type        = "list"
+  type        = list(string)
 }
 
 variable "internal" {
   description = "If true, ELB will be an internal ELB."
+  default     = false
 }
 
 variable "idle_timeout" {
@@ -35,6 +39,47 @@ variable "connection_draining" {
 variable "connection_draining_timeout" {
   description = "The time in seconds to allow for connections to drain."
   default     = "60"
+}
+
+variable "access_logs_bucket" {
+  description = "The S3 bucket name to store the logs in."
+  default     = null
+}
+
+variable "access_logs_bucket_prefix" {
+  description = "The S3 bucket prefix. Logs are stored in the root if not configured."
+  default     = null
+}
+
+variable "access_logs_interval" {
+  description = "The publishing interval in minutes."
+  default     = "60"
+}
+
+variable "access_logs_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "instance_port" {
+  type        = number
+  description = "The port on the instance to route to"
+  default     = 80
+}
+
+variable "instance_protocol" {
+  description = "The protocol to use to the instance. Valid values are HTTP, HTTPS, TCP, or SSL"
+  default     = "http"
+}
+
+variable "lb_port" {
+  description = "The port to listen on for the load balancer"
+  default     = 80
+}
+
+variable "lb_protocol" {
+  description = "The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL"
+  default     = "http"
 }
 
 variable "instance_ssl_port" {
@@ -58,7 +103,8 @@ variable "lb_ssl_protocol" {
 }
 
 variable "ssl_certificate_id" {
-  description = " The ARN of an SSL certificate you have uploaded to AWS IAM. Only valid when lb_protocol is either HTTPS or SSL"
+  description = " The ARN of an SSL certificate you have uploaded to AWS IAM. If specified it will create an additional ssl listener"
+  default     = null
 }
 
 variable "healthy_threshold" {
@@ -77,7 +123,7 @@ variable "health_timeout" {
 }
 
 variable "health_target" {
-  description = "The target of the check. Valid pattern is ${PROTOCOL}:${PORT}${PATH}"
+  description = "The target of the check. Valid pattern is $${PROTOCOL}:$${PORT}$${PATH}"
 }
 
 variable "health_interval" {
@@ -87,5 +133,5 @@ variable "health_interval" {
 
 variable "ingoing_allowed_ips" {
   default = ["0.0.0.0/0"]
-  type    = "list"
+  type    = list(string)
 }
