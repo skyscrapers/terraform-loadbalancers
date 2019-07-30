@@ -69,7 +69,7 @@ module "alb" {
 * [`target_port`]: Int(optional, 80): The port of which targets receive traffic
 * [`target_protocol`]: String(optional, "HTTP"): The protocol to sue for routing traffic to the targets
 * [`target_deregistration_delay`]: Int(optional, 30): The time in seconds before deregistering the target
-* [`target_stickiness`]: List(string)(optional, []): An ALB target_group stickiness block
+* [`target_stickiness`]: List(map(string))(optional, []): An ALB target_group stickiness block
 * [`target_health_interval`]: Int(optional, 30): Time in seconds between target health checks
 * [`target_health_path`]: String(optional, "/"): Path for the health check request
 * [`target_health_timeout`]: Int(optional, 5): Time in seconds to wait for a successful health check response

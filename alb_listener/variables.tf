@@ -58,8 +58,8 @@ variable "target_deregistration_delay" {
 }
 
 variable "target_stickiness" {
-  description = "List(optional, []): An ALB target_group stickiness block"
-  type        = list(string)
+  description = "An ALB target_group stickiness block"
+  type        = list(map(string))
   default     = []
 }
 
