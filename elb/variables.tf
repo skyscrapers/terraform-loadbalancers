@@ -135,3 +135,8 @@ variable "ingoing_allowed_ips" {
   default = ["0.0.0.0/0"]
   type    = list(string)
 }
+
+variable "custom_listeners" {
+  default = []
+  type    = list(map(string))
+}
