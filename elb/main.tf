@@ -45,6 +45,17 @@ resource "aws_elb" "elb" {
     }
   }
 
+  dynamic "listener" {
+    for_each = var.custom_listeners
+    content {
+      instance_port      = lookup(listener.value, "instance_port", null)
+      instance_protocol  = lookup(listener.value, "instance_protocol", null )
+      lb_port            = lookup(listener.value, "lb_port", null )
+      lb_protocol        = lookup(listener.value, "lb_protocol", null )
+      ssl_certificate_id = lookup(listener.value, "ssl_certificate_id", null )
+    }
+  }
+
   health_check {
     healthy_threshold   = var.healthy_threshold
     unhealthy_threshold = var.unhealthy_threshold
