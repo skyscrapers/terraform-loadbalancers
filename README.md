@@ -20,7 +20,7 @@ Setup an ALB with related resources.
 * [`internal`]: Bool(optional, false): Is this an internal ALB or not
 * [`subnets`]: List(string)(required): Subnets to deploy the ALB in
 * [`enable_deletion_protection`]: Bool(optional, false): Whether to enable deletion protection of this ALB or not
-* [`access_logs`]: List(map(string))(optional, []): An ALB access_logs block
+* [`access_logs`]: map(string)(optional, null): An ALB access_logs block
 * [`tags`]: Map(string)(optional, {}): Optional tags
 
 ### Output
@@ -42,9 +42,9 @@ module "alb" {
   vpc_id                   = data.terraform_remote_state.shared_static.vpc_id
   subnets                  = data.terraform_remote_state.shared_static.public_lb_subnets
 
-  access_logs = [{
+  access_logs = {
     bucket = "alb-logs-bucket"
-  }]
+  }
 
   tags = {
     Role = "loadbalancer"
