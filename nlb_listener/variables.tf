@@ -58,3 +58,15 @@ variable "tags" {
   default     = {}
 }
 
+variable "listener_protocol" {
+ description = "String(optional, \"TCP\") The protocol for connections from clients to the load balancer. Valid values are TCP, TLS, UDP, or TCP_UDP"
+ type        = string
+ default     = "TCP"
+}
+
+variable "certificate_arn" {
+ description = "String(optional, \"\")  The ARN of the default SSL server certificate. Required if protocol is TLS"
+ type        = string
+ default     = null
+}
+

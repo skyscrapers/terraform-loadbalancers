@@ -31,7 +31,8 @@ resource "aws_lb_target_group" "default" {
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = var.nlb_arn
   port              = var.ingress_port
-  protocol          = "TCP"
+  protocol          = var.listener_protocol
+  certificate_arn   = var.certificate_arn
 
   default_action {
     # Using join with resource.* as workaround for https://github.com/hashicorp/hil/issues/50
