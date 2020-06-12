@@ -76,7 +76,7 @@ module "alb" {
 * [`target_health_healthy_threshold`]: Int(optional, 5): The number of consecutive health checks successes before considering a target healthy
 * [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
 * [`target_health_matcher`]: Int(optional, 200): The HTTP codes to use when checking for a successful response from a target
-* [`target_health_protocol`]: String(optional): The protocol to use for the health check. If not set, it will use the same protocal as target_protocol
+* [`target_health_protocol`]: String(optional): The protocol to use for the health check. If not set, it will use the same protocol as target_protocol
 * [`source_subnet_cidrs`]: List(string)(optional, ["0.0.0.0/0"]): Subnet CIDR blocks from where the ALB will receive traffic
 * [`tags`]: Map(string)(optional, {}): Optional tags
 
@@ -237,7 +237,7 @@ part of your target group.
 * [`target_health_unhealthy_threshold`]: Int(optional, 2): The number of consecutive health check failures before considering a target unhealthy
 * [`target_type`]: String(optional, "instance"): The type of target that you must specify when registering targets with this target group. The possible values are instance (targets are specified by instance ID) or ip (targets are specified by IP address).
 * [`tags`]: Map(string)(optional, {}): Optional tags
-* [`listener_protocal`]: String(optional, "TCP"): The protocol for connections from clients to the load balancer. Valid values are TCP, TLS, UDP, or TCP_UDP
+* [`listener_protocol`]: String(optional, "TCP"): The protocol for connections from clients to the load balancer. Valid values are TCP, TLS, UDP, or TCP_UDP
 * [`certificate_arn`]: String(optional, ""): The ARN of the default SSL server certificate. Required if protocol is TLS
 
 ### Output

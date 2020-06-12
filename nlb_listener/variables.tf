@@ -67,6 +67,6 @@ variable "listener_protocol" {
 variable "certificate_arn" {
  description = "String(optional, \"\")  The ARN of the default SSL server certificate. Required if protocol is TLS"
  type        = string
- default     = ""
+ default     = null
 }
 
