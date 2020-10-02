@@ -152,7 +152,7 @@ and the corresponding PR is https://github.com/terraform-providers/terraform-pro
 
 ```terraform
 module "target" {
-  source                    = "github.com/skyscrapers/terraform-loadbalancers//alb_rule_target_rule?ref=1.0.0"
+  source                    = "github.com/skyscrapers/terraform-loadbalancers//alb_rule_target?ref=1.0.0"
   name                      = "web"
   environment               = terraform.workspace
   project                   = var.project
